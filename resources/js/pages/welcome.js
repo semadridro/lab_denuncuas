@@ -1,8 +1,15 @@
-import React, {  } from 'react';
+import React, { useEffect, Fragment } from "react";
 import Formulario from './formulario';
+
+import M from "materialize-css/dist/js/materialize.min.js";
 
 export default function Deuncias () {
 
+    useEffect(() => {
+        // Init Tabs Materialize JS
+        let tabs = document.querySelectorAll(".tabs");
+        M.Tabs.init(tabs);
+    });
 
   return (<>
     <div>
