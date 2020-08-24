@@ -9,6 +9,9 @@ export default function Deuncias () {
         // Init Tabs Materialize JS
         let tabs = document.querySelectorAll(".tabs");
         M.Tabs.init(tabs);
+
+        let parallax = document.querySelectorAll(".parallax");
+        M.Parallax.init(parallax);
     });
 
   return (<>
