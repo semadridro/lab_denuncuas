@@ -15,6 +15,12 @@ export const register = ({ email, name, password, password_confirmation }) => {
   });
 };
 
+
+export const registroDenuncia = ({ dataJson }) => {
+    return client('/api/denuncias/saveDate', { body: { dataJson } })
+        .then(({ codigo }) => codigo);
+};
+
 export const forgotPassword = ({ email }) => {
   return client('/api/password/email', { body: { email } })
     .then(({ status }) => status);

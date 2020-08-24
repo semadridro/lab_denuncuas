@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Welcome from '../pages/welcome';
+import Denuncias from '../pages/welcome';
 import Login from '../pages/auth/login';
 import Register from '../pages/auth/register';
 import ForgotPassword from '../pages/auth/forgot-password';
@@ -19,9 +19,9 @@ function App () {
     initializing
       ? <FullPageSpinner />
       : <Router>
-        <div className="flex flex-col min-h-screen">
+        <div>
           <Switch>
-            <GuestRoute exact path="/" component={Welcome} title="welcome" />
+            <GuestRoute exact path="/" component={Denuncias} title="Denuncia Anónima - Viña Emiliana" />
             <GuestRoute path="/register" component={Register} title="register" />
             <GuestRoute path="/login" component={Login} title="login"/>
             <GuestRoute path="/forgot-password" component={ForgotPassword} title="forgot password"/>

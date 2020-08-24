@@ -22,6 +22,10 @@ Route::name('api.')->namespace('Api')->group(function () {
             // Password Reset Routes...
             Route::post('password/email', 'ForgotPasswordController@sendResetLinkEmail');
             Route::post('password/reset', 'ResetPasswordController@reset');
+
+            // Rutas para insert de form
+
+            Route::post('denuncias/saveDate', 'DenunciasController')->name('register');
         });
     });
 
@@ -33,3 +37,4 @@ Route::name('api.')->namespace('Api')->group(function () {
         });
     });
 });
+
