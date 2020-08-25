@@ -569,9 +569,7 @@ export default function Formulario () {
                                        onClick={() => {
                                            console.log('next paso');
                                            console.log(steep);
-                                           submitData.listado.queHara == 11 || steep > 8 ?
-                                               onSubmit(event, submitData)
-                                               : setSteep(parseInt(steep + 1));
+                                           submitData.listado.queHara == 11 || steep > 8 ? onSubmit(event, submitData)  : setSteep(parseInt(steep + 1));
                                        }}>Continuar</a>
                                 </div>
                             </> : ''}
