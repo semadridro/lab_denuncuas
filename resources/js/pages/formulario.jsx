@@ -110,6 +110,7 @@ export default function Formulario () {
             });
     };
 
+    {/*  <div className="col s12"><LinearProgress/> Denuncia realiza con éxito, el código asignado es <b>{Math.random().toString(36).slice(2)}</b></div> : resetFeedback != '' ?*/}
     return (
         <>
             <FormControl onSubmit={onSubmit} ref={form}>
@@ -123,8 +124,7 @@ export default function Formulario () {
                                 mantendrá el carácter confidencial.</b></p>
                         </blockquote>
                     </div>
-                    {loading ? <div className="col s12"><LinearProgress/> Denuncia realiza con éxito, el código asignado es <b>{Math.random().toString(36).slice(2)}</b></div> : resetFeedback != '' ?
-                        <div className="col s12">
+                    {loading ? <div className="col s12">
                             <Alert variant="filled" severity="success">
                                 Denuncia realiza con éxito, el código asignado es <b>{Math.random().toString(36).slice(2)}</b>
                             </Alert>
