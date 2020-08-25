@@ -66,7 +66,7 @@ export default function Deuncias () {
                                 <div className="space-50"></div>
                                 <a className="waves-effect btn btn-large btn-descarga z-depth-0"
                                    href={"doc/Procedimiento de Denuncias Anónimas, Sugerencias o Reclamos de Viñedos Emiliana S.A. y Filiales.pdf"}
-                                download={"Procedimiento de Denuncias Anónimas, Sugerencias o Reclamos de Viñedos Emiliana S.A. y Filiales"}>Procedimiento de
+                                download={"Procedimiento de Denuncias Anónimas, Sugerencias o Reclamos de Viñedos Emiliana S.A. y Filiales.pdf"}>Procedimiento de
                                     Denuncias Anónimas de Viña Emiliana <i className="fas fa-download"></i></a>
                                 <div className="space-50"></div>
                             </div>
