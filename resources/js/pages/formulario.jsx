@@ -59,6 +59,8 @@ export default function Formulario () {
 
 
     const onSubmit = async (event, submitData) => {
+
+        setloading(true);
         setloading(true);
         console.log('guardo la data');
         console.log(submitData);
@@ -94,6 +96,7 @@ export default function Formulario () {
             .then(status => {
                 console.log('status.status');
                 console.log(status)
+                /*
                 setResetFeedback(status);
                 let stCodigo  = status
                 console.log('stCodigo')
@@ -101,7 +104,7 @@ export default function Formulario () {
                 setcodigo((codigo) => Math.random().toString(36).slice(2))
                 console.log(resetFeedback)
                 console.log(codigo)
-                console.log(status)
+                console.log(status)*/
             })
             .catch(error => {
                 error.json().then(({errors}) => {
