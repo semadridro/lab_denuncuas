@@ -19,6 +19,7 @@ class DenunciasController extends Controller
             "codigoReg" => $randID
         ]);
 
+
         return response()->json(['status' => trans($randID)], 200);
     }
 

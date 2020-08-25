@@ -39,20 +39,34 @@ export default function Deuncias () {
                             <div className="row">
                                 <h1 className="center-align">DENUNCIAS ANÓNIMAS</h1>
                                 <div className="space-50"></div>
-                                <p>Viña Emiliana ha implementado a través de su sitio web un sistema sencillo y
-                                    eficiente de reporte de denuncias anónimas.</p>
 
-                                <p>De esta forma empleados, clientes, proveedores, accionistas y terceros pueden hacer
-                                    una denuncia anónima, con carácter de confidencial, con respecto a temas
-                                    relacionados con la contabilidad, fraudes, salvaguarda de activos, asuntos de
-                                    auditoría o cualquier otro relacionado con el control interno de la Compañía.</p>
+                                <p>Viñedos Emiliana S.A. y Filiales han implementado a través de su sitio web un sistema
+                                    sencillo y eficiente de reporte de denuncias anónimas, sugerencias y/o reclamos.</p>
+                                <p>De esta forma empleados, clientes, proveedores, accionistas y terceros pueden comunicar a
+                                la Compañía, con carácter confidencial, respecto a la comisión de delitos contemplados en
+                                la Ley 20.393, además de otros temas y delitos relacionados con actividades que pueden
+                                implicar irregularidades, uso inadecuado de bienes o recursos de la Compañía, conductas
+                                abusivas de ésta, violaciones al ordenamiento jurídico vigente o de nuestras políticas
+                                corporativas. Si usted desea realizar una denuncia, le recomendamos suministrar todos los
+                                detalles relacionados con la presunta infracción, inclusive las ubicaciones de los testigos y
+                                cualquier otra información que pueda ser valiosa en la evaluación y resolución final de esta
+                                    situación.</p>
 
-                                <p>Suministre todos los detalles relacionados con la presunta infracción, inclusive las
-                                    ubicaciones de los testigos y cualquier otra información que pueda ser valiosa en la
-                                    evaluación y resolución final de esta situación. Antes de hacer su denuncia le
-                                    recomendamos leer el “Procedimiento de Denuncias Anónimas de Viña Emiliana”</p>
+                                <p>Adicionalmente se ha incorporado la opción de que a través de este canal se pueda hacer
+                                llegar a la empresa cualquier sugerencia o reclamo del personal interno y/o colaboradores
+                                externos con el objetivo de informar a la Administración de situaciones que a su entender
+                                deben ser mejoradas o abordadas por la Compañía y que sean de interés tanto para los
+                                trabajadores como para el entorno y comunidad donde Viñedos Emiliana S.A. y sus Filiales
+                                desarrollan sus actividades administrativas, agrícolas, productivas, y comerciales.</p>
+
+                                <p>Le sugerimos que antes de hacer su denuncia, sugerencia y/o reclamos, lea nuestro
+                                <b> “Procedimiento de Denuncias Anónimas, sugerencias y/o reclamos de Viñedos
+                                    Emiliana S.A. y Filiales” </b></p>
+
                                 <div className="space-50"></div>
-                                <a className="waves-effect btn btn-large btn-descarga z-depth-0">Procedimiento de
+                                <a className="waves-effect btn btn-large btn-descarga z-depth-0"
+                                   href={"doc/Procedimiento de Denuncias Anónimas, Sugerencias o Reclamos de Viñedos Emiliana S.A. y Filiales.pdf"}
+                                download={"Procedimiento de Denuncias Anónimas, Sugerencias o Reclamos de Viñedos Emiliana S.A. y Filiales"}>Procedimiento de
                                     Denuncias Anónimas de Viña Emiliana <i className="fas fa-download"></i></a>
                                 <div className="space-50"></div>
                             </div>
@@ -87,36 +101,36 @@ export default function Deuncias () {
                                         </div>
 
                                         <div className="space-30"></div>
-                                        <div className="col s12">
+                                        {/*<div className="col s12">
                                             <p><b>El estado de su denuncia es el siguiente.</b></p>
                                         </div>
-                                        <div className="col s12">
+                                            <div className="col s12">
                                             <table>
-                                                <tbody>
-                                                <tr className="border-top">
-                                                    <td className="min-width-table desc">Código de denuncia</td>
-                                                    <td> RAYU-6U7P-T34P</td>
+                                            <tbody>
+                                            <tr className="border-top">
+                                            <td className="min-width-table desc">Código de denuncia</td>
+                                            <td> RAYU-6U7P-T34P</td>
 
-                                                </tr>
-                                                <tr>
-                                                    <td className="desc">Fecha de solicitud realizada</td>
-                                                    <td>26/06/2020 09:16 pm</td>
-                                                </tr>
-                                                <tr>
-                                                    <td className="desc">Estado</td>
-                                                    <td>Procesando</td>
-                                                </tr>
-                                                <tr>
-                                                    <td className="desc">Mensaje</td>
-                                                    <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
-                                                        blandit augue lacus, eu efficitur purus euismod ut. Praesent
-                                                        viverra nisl vel lorem posuere convallis. Duis sit amet tempor
-                                                        arcu, vitae porta purus.
-                                                    </td>
-                                                </tr>
-                                                </tbody>
+                                            </tr>
+                                            <tr>
+                                            <td className="desc">Fecha de solicitud realizada</td>
+                                            <td>26/06/2020 09:16 pm</td>
+                                            </tr>
+                                            <tr>
+                                            <td className="desc">Estado</td>
+                                            <td>Procesando</td>
+                                            </tr>
+                                            <tr>
+                                            <td className="desc">Mensaje</td>
+                                            <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
+                                            blandit augue lacus, eu efficitur purus euismod ut. Praesent
+                                            viverra nisl vel lorem posuere convallis. Duis sit amet tempor
+                                            arcu, vitae porta purus.
+                                            </td>
+                                            </tr>
+                                            </tbody>
                                             </table>
-                                        </div>
+                                            </div>*/}
                                     </div>
 
 
