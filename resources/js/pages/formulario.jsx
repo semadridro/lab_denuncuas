@@ -59,8 +59,6 @@ export default function Formulario () {
 
 
     const onSubmit = async (event, submitData) => {
-
-        setloading(true);
         setloading(true);
         console.log('guardo la data');
         console.log(submitData);
@@ -96,7 +94,6 @@ export default function Formulario () {
             .then(status => {
                 console.log('status.status');
                 console.log(status)
-                /*
                 setResetFeedback(status);
                 let stCodigo  = status
                 console.log('stCodigo')
@@ -104,7 +101,7 @@ export default function Formulario () {
                 setcodigo((codigo) => Math.random().toString(36).slice(2))
                 console.log(resetFeedback)
                 console.log(codigo)
-                console.log(status)*/
+                console.log(status)
             })
             .catch(error => {
                 error.json().then(({errors}) => {
@@ -112,8 +109,6 @@ export default function Formulario () {
                 });
             });
     };
-
-    {/*<div className="col s12"><LinearProgress/></div>*/}
 
     return (
         <>
@@ -128,7 +123,8 @@ export default function Formulario () {
                                 mantendrá el carácter confidencial.</b></p>
                         </blockquote>
                     </div>
-                    {loading ?  <div className="col s12">
+                    {loading ? <div className="col s12"><LinearProgress/> Denuncia realiza con éxito, el código asignado es <b>{Math.random().toString(36).slice(2)}</b></div> : resetFeedback != '' ?
+                        <div className="col s12">
                             <Alert variant="filled" severity="success">
                                 Denuncia realiza con éxito, el código asignado es <b>{Math.random().toString(36).slice(2)}</b>
                             </Alert>
