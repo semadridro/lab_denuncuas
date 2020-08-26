@@ -2,6 +2,8 @@ import React, { useEffect, Fragment } from "react";
 import Formulario from './formulario';
 
 import M from "materialize-css/dist/js/materialize.min.js";
+import Header from './header';
+import Footer from './Footer';
 
 export default function Deuncias () {
 
@@ -9,26 +11,11 @@ export default function Deuncias () {
         // Init Tabs Materialize JS
         let tabs = document.querySelectorAll(".tabs");
         M.Tabs.init(tabs);
-
-        let parallax = document.querySelectorAll(".parallax");
-        M.Parallax.init(parallax);
     });
 
   return (<>
     <div>
-        <div id="index-banner" className="parallax-container">
-            <div className="section no-pad-bot">
-                <div className="container ">
-                    <div className="row center ">
-                        <img className="logo" src="img/emiliana-logo.png"/>
-                    </div>
-
-
-                </div>
-            </div>
-            <div className="parallax"><img src="img/background1.jpg" alt="Unsplashed background img 1"/></div>
-        </div>
-
+        <Header/>
 
         <div className="container">
             <div className="section">
@@ -145,38 +132,7 @@ export default function Deuncias () {
         </div>
 
 
-        <footer className="page-footer color">
-
-            <div className="row">
-                <div className="col l3 s12 center">
-                    <img className="logo" src="img/emiliana-logo.png"/>
-                </div>
-                <div className="col l3 s12 offset-l3">
-                    <ul>
-                        <li><a href="tel:+56223539130" target="_blank"><i className="fas fa-phone-alt"></i> +562 2 353
-                            9130</a></li>
-                        <li><a href="mailto:contacto@emiliana.cl" target="_blank"><i
-                            className="fas fa-envelope"></i> contacto@emiliana.cl</a></li>
-                        <li><a href="https://goo.gl/maps/RbhWYpgc2cEAh5QT7" target="_blank"><i
-                            className="fas fa-map-marker-alt"></i><p className="direccion"> Edificio WTC Avenida Nueva
-                            Tajamar 481 Of. 905. Torre Sur. Las Condes. Santiago. Chile</p></a></li>
-                    </ul>
-                </div>
-                <div className="col l3 s12">
-                    <ul>
-                        <li><a href="https://www.facebook.com/EmilianaOrganicWines" target="_blank"><i
-                            className="fab fa-facebook-square"></i> /EmilianaOrganicWines</a></li>
-                        <li><a href="https://twitter.com/VinosEmiliana" target="_blank"><i
-                            className="fab fa-twitter"></i> @VinosEmiliana</a></li>
-                        <li><a href="https://www.pinterest.cl/winesemiliana/boards/" target="_blank"><i
-                            className="fab fa-pinterest"></i> /winesemiliana</a></li>
-                        <li><a href="https://www.instagram.com/emilianaorganic/" target="_blank"><i
-                            className="fab fa-instagram"></i> @EmilianaOrganic</a></li>
-                    </ul>
-                </div>
-            </div>
-
-        </footer>
+        <Footer />
     </div>
       </>
   );
