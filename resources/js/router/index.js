@@ -23,10 +23,10 @@ function App () {
           <Switch>
             <GuestRoute exact path="/" component={Denuncias} title="Denuncia Anónima - Viña Emiliana" />
             <GuestRoute path="/register" component={Register} title="register" />
-            <GuestRoute path="/login" component={Login} title="login"/>
+            <GuestRoute path="/login" component={Login} title="Login"/>
             <GuestRoute path="/forgot-password" component={ForgotPassword} title="forgot password"/>
             <GuestRoute path="/password/reset/:token" component={ResetPassword} title="reset password"/>
-            <AuthRoute path="/home" component={Home} title="home"/>
+            <AuthRoute path="/home" component={Home} title="Denuncia Anónima Admin"/>
             <AuthRoute path="/profile/:id" component={Profile} title="profile"/>
             <Route component={NotFound}/>
           </Switch>

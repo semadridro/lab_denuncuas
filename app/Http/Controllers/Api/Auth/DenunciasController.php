@@ -13,10 +13,16 @@ class DenunciasController extends Controller
     {
 
         $randID =  $id = str_random(6);
+        $data = json_decode($request->dataJson);
+        var_dump($data->listado);
+        var_dump($data->codigo);
 
         $regDenuncia = Denuncias::create([
-            "dataJson" => json_encode($request->dataJson),
-            "codigoReg" => $randID
+            "dataJson" => json_encode($data->listado),
+            "codigoReg" => $data->codigo,
+            "tipo_denuncia" => empty($data->listado->tipo_denuncia)?$data->listado->queHara:$data->listado->tipo_denuncia,
+            "mensaje" => empty($data->listado->detalleGeneral)?$data->listado->queHaraDetalle:$data->listado->detalleGeneral,
+            "id_estado" => 0
         ]);
 
 
@@ -28,7 +34,6 @@ class DenunciasController extends Controller
 
         var_dump($request);
 
-
         $randID =  $id = str_random(6);
 
         $regDenuncia = Denuncias::create([
@@ -37,6 +42,21 @@ class DenunciasController extends Controller
         ]);
 
         return response()->json(['status' => trans($randID)], 200);
+    }
+
+    public function getallDenuncias (Request $request){
+
+        $denuncias = Denuncias::select("codigoReg AS codigo", "created_at AS fecha", "tipo_denuncia AS tipo", "mensaje", "id");
+
+        if (!isset($request)){
+            $denuncias = $denuncias->where("id_estado", "=", $request->id_estado);
+        }
+
+        $denuncias = $denuncias->get();
+
+        //return response()->json(['data' => trans($denuncias)], 200);
+
+        return response()->json(['data' => $denuncias ], 200);
     }
 }
 

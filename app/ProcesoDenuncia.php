@@ -3,13 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use HiHaHo\EncryptableTrait\Encryptable;
 
-class Denuncias extends Model
+class ProcesoDenuncia extends Model
 {
     //
 
-    protected $table = 'reg_denuncias';
+    protected $table = 'proceso_denuncia';
 
     /*
     use Encryptable;
@@ -20,6 +19,6 @@ class Denuncias extends Model
 
 
     protected $fillable = [
-        'dataJson', 'codigoReg', 'tipo_denuncia','mensaje','id_estado'
+        'id_denuncia', 'respuesta', 'json'
     ];
 }

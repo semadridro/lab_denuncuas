@@ -9,11 +9,25 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import LiveHelpIcon from '@material-ui/icons/LiveHelp';
+
+import BottomNavigation from '@material-ui/core/BottomNavigation';
+import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+import FolderIcon from '@material-ui/icons/Folder';
+import RestoreIcon from '@material-ui/icons/Restore';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import LocationOnIcon from '@material-ui/icons/LocationOn';
+
+import WatchLaterIcon from '@material-ui/icons/WatchLater';
+import CheckBoxIcon from '@material-ui/icons/CheckBox';
+import BlockIcon from '@material-ui/icons/Block';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import AutorenewIcon from '@material-ui/icons/Autorenew';
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
+        width: '100%',
         flexGrow: 1,
     },
     menuButton: {
@@ -27,6 +41,12 @@ const useStyles = makeStyles((theme) => ({
 function AuthNav () {
 
     const classes = useStyles();
+    const [value, setValue] = React.useState('recents');
+
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
+
     let {setCurrentUser, setToken, currentUser} = useAuth();
     let history = useHistory();
     let [hideMobileNav, setHideMobileNav] = useState(true);
@@ -44,7 +64,7 @@ function AuthNav () {
     return (
         <>
             <div className={classes.root}>
-                <AppBar position="static" color="primary">
+                <AppBar position="static">
                     <Toolbar>
                         <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
                             <LiveHelpIcon/>
@@ -55,6 +75,14 @@ function AuthNav () {
                         <Button type={"button"} color="inherit" onClick={handleLogout}> {currentUser.name}</Button>
                     </Toolbar>
                 </AppBar>
+
+                <BottomNavigation value={value} onChange={handleChange} className={classes.root}>
+                    <BottomNavigationAction label="Pendientes" value="Pendientes" icon={<WatchLaterIcon />} />
+                    <BottomNavigationAction label="Procesando" value="Procesando" icon={<AutorenewIcon />} />
+                    <BottomNavigationAction label="Concluidas" value="Concluidas" icon={<CheckBoxIcon />} />
+                    <BottomNavigationAction label="Spam" value="Spam" icon={<BlockIcon />} />
+                </BottomNavigation>
+
             </div>
     {/*
         <div className="auth-nav flex flex-row h-16 border-b border-grey-light">

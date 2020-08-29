@@ -22,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Formulario () {
 
+    const [codigo, setcodigo] = useState(Math.random().toString(36).slice(2));
     const [submitData, setSubmitData] = useState({
         listado: {
             identificarse: '',
@@ -40,6 +41,7 @@ export default function Formulario () {
             ComoseEnteroDetalle: '',
             detalleGeneral: '',
         },
+        codigo: codigo
     });
     const classes = useStyles();
     const [age, setAge] = React.useState('');
@@ -55,16 +57,15 @@ export default function Formulario () {
     const form = useRef(null);
     const [resetFeedback, setResetFeedback] = useState('');
 
-    const [codigo, setcodigo] = useState('');
-
 
     const onSubmit = async (event, submitData) => {
         setloading(true);
         console.log('guardo la data');
         console.log(submitData);
         event.preventDefault();
+        setcodigo(Math.random().toString(36).slice(2));
 
-        let jsonData = JSON.stringify(Object.entries(submitData.listado));
+        let jsonData = JSON.stringify(submitData);
 
         let formData = new FormData();
         formData.append('dataJson', jsonData);
@@ -98,7 +99,6 @@ export default function Formulario () {
                 let stCodigo  = status
                 console.log('stCodigo')
                 console.log(stCodigo)
-                setcodigo((codigo) => Math.random().toString(36).slice(2))
                 console.log(resetFeedback)
                 console.log(codigo)
                 console.log(status)
@@ -126,7 +126,7 @@ export default function Formulario () {
                     </div>
                     {loading ? <div className="col s12">
                             <Alert variant="filled" severity="success">
-                                Denuncia realiza con éxito, el código asignado es <b>{Math.random().toString(36).slice(2)}</b>
+                                Denuncia realiza con éxito, el código asignado es <b>{codigo}</b>
                             </Alert>
                         </div> : <>
 
@@ -205,16 +205,16 @@ export default function Formulario () {
                                                     console.log(event.target.value);
                                                     console.log(submitData);
                                                 }}>
-                                        <FormControlLabel value="1" control={<Radio/>} label="Trabjador de Emiliana"/>
-                                        <FormControlLabel value="2" control={<Radio/>} label="Cliente destribuidor"/>
-                                        <FormControlLabel value="3" control={<Radio/>} label="Cliente consumidor"/>
-                                        <FormControlLabel value="4" control={<Radio/>} label="Proveedor"/>
-                                        <FormControlLabel value="5" control={<Radio/>} label="Contratista"/>
-                                        <FormControlLabel value="99" control={<Radio/>} label="Otro"/>
+                                        <FormControlLabel value="Trabjador de Emiliana" control={<Radio/>} label="Trabjador de Emiliana"/>
+                                        <FormControlLabel value="Cliente destribuidor" control={<Radio/>} label="Cliente destribuidor"/>
+                                        <FormControlLabel value="Cliente consumidor" control={<Radio/>} label="Cliente consumidor"/>
+                                        <FormControlLabel value="Proveedor" control={<Radio/>} label="Proveedor"/>
+                                        <FormControlLabel value="Contratista" control={<Radio/>} label="Contratista"/>
+                                        <FormControlLabel value="Otro" control={<Radio/>} label="Otro"/>
                                     </RadioGroup>
                                 </FormControl>
 
-                                {submitData.listado.relacionCompany == 99 ?
+                                {submitData.listado.relacionCompany == "Otro" ?
                                     <div className="col s12 respuesta">
                                         <div className="input-field">
                                 <textarea id="textarea1" className="materialize-textarea" onChange={(event) => {
@@ -252,13 +252,12 @@ export default function Formulario () {
                                                     console.log(event.target.value);
                                                     console.log(submitData);
                                                 }}>
-                                        <FormControlLabel value="11" control={<Radio/>}
-                                                          label="Sugerencias y/o Reclamos Internos"/>
-                                        <FormControlLabel value="22" control={<Radio/>} label="Realizar una denuncia"/>
+                                        <FormControlLabel value="Sugerencias y/o Reclamos Internos" control={<Radio/>} label="Sugerencias y/o Reclamos Internos"/>
+                                        <FormControlLabel value="Realizar una denuncia" control={<Radio/>} label="Realizar una denuncia"/>
                                     </RadioGroup>
                                 </FormControl>
 
-                                {submitData.listado.queHara == 11 ?
+                                {submitData.listado.queHara == "Sugerencias y/o Reclamos Internos" ?
                                     <div className="col s12 respuesta">
                                         <div className="input-field">
                                 <textarea id="textarea1" className="materialize-textarea" onChange={(event) => {
@@ -301,41 +300,41 @@ export default function Formulario () {
                                                     console.log(event.target.value);
                                                     console.log(submitData);
                                                 }}>
-                                        <FormControlLabel value="1" control={<Radio/>}
+                                        <FormControlLabel value="Aspectos contables y de auditoria" control={<Radio/>}
                                                           label="Aspectos contables y de auditoria"/>
-                                        <FormControlLabel value="2" control={<Radio/>} label="Confidencialidad"/>
-                                        <FormControlLabel value="3" control={<Radio/>} label="Conflicto de interés"/>
-                                        <FormControlLabel value="4" control={<Radio/>}
+                                        <FormControlLabel value="Confidencialidad" control={<Radio/>} label="Confidencialidad"/>
+                                        <FormControlLabel value="Conflicto de interés" control={<Radio/>} label="Conflicto de interés"/>
+                                        <FormControlLabel value="Apropiación indebida y/o desvío de recursos" control={<Radio/>}
                                                           label="Apropiación indebida y/o desvío de recursos"/>
-                                        <FormControlLabel value="5" control={<Radio/>}
+                                        <FormControlLabel value="Protección del medio ambiente" control={<Radio/>}
                                                           label="Protección del medio ambiente"/>
-                                        <FormControlLabel value="6" control={<Radio/>}
+                                        <FormControlLabel value="Falsificación de contratos, registros o informes" control={<Radio/>}
                                                           label="Falsificación de contratos, registros o informes"/>
-                                        <FormControlLabel value="7" control={<Radio/>}
+                                        <FormControlLabel value="Cohecho - Soborno a funcionario público" control={<Radio/>}
                                                           label="Cohecho - Soborno a funcionario público"/>
-                                        <FormControlLabel value="8" control={<Radio/>}
+                                        <FormControlLabel value="Cohecho - Soborno entre privados" control={<Radio/>}
                                                           label="Cohecho - Soborno entre privados"/>
-                                        <FormControlLabel value="9" control={<Radio/>} label="Corrupción"/>
-                                        <FormControlLabel value="10" control={<Radio/>}
+                                        <FormControlLabel value="Corrupción" control={<Radio/>} label="Corrupción"/>
+                                        <FormControlLabel value="Compra de especies robadas" control={<Radio/>}
                                                           label="Compra de especies robadas"/>
-                                        <FormControlLabel value="11" control={<Radio/>}
+                                        <FormControlLabel value="Mal uso de dineros de la empresa (tarjetas de créditos, fondos fijos, etc.)" control={<Radio/>}
                                                           label="Mal uso de dineros de la empresa (tarjetas de créditos, fondos fijos, etc.)"/>
-                                        <FormControlLabel value="12" control={<Radio/>}
+                                        <FormControlLabel value="Actuaciones relacionadas con contratistas" control={<Radio/>}
                                                           label="Actuaciones relacionadas con contratistas"/>
-                                        <FormControlLabel value="13" control={<Radio/>}
+                                        <FormControlLabel value="Represalias, discriminación" control={<Radio/>}
                                                           label="Represalias, discriminación"/>
-                                        <FormControlLabel value="14" control={<Radio/>}
+                                        <FormControlLabel value="Seguridad en el trabajo" control={<Radio/>}
                                                           label="Seguridad en el trabajo"/>
-                                        <FormControlLabel value="15" control={<Radio/>}
+                                        <FormControlLabel value="Infracciones relacionadas con valores o títulos" control={<Radio/>}
                                                           label="Infracciones relacionadas con valores o títulos"/>
-                                        <FormControlLabel value="16" control={<Radio/>} label="Acoso sexual"/>
-                                        <FormControlLabel value="17" control={<Radio/>} label="Acoso laboral"/>
-                                        <FormControlLabel value="19" control={<Radio/>} label="Otros"/>
+                                        <FormControlLabel value="Acoso sexual" control={<Radio/>} label="Acoso sexual"/>
+                                        <FormControlLabel value="Acoso laboral" control={<Radio/>} label="Acoso laboral"/>
+                                        <FormControlLabel value="Otros" control={<Radio/>} label="Otros"/>
                                     </RadioGroup>
                                 </FormControl>
 
 
-                                {submitData.listado.TipoDenunci == 19 ?
+                                {submitData.listado.TipoDenunci == "Otros" ?
                                     <div className="col s12 respuesta">
                                         <div className="input-field">
                                 <textarea id="textarea1" className="materialize-textarea" onChange={(event) => {
@@ -480,19 +479,19 @@ export default function Formulario () {
                                                     console.log(event.target.value);
                                                     console.log(submitData);
                                                 }}>
-                                        <FormControlLabel value="1" control={<Radio/>} label="Me sucedió a mi"/>
-                                        <FormControlLabel value="2" control={<Radio/>} label="Lo observé"/>
-                                        <FormControlLabel value="3" control={<Radio/>} label="Lo escuché"/>
-                                        <FormControlLabel value="4" control={<Radio/>}
+                                        <FormControlLabel value="Me sucedió a mi" control={<Radio/>} label="Me sucedió a mi"/>
+                                        <FormControlLabel value="Lo observé" control={<Radio/>} label="Lo observé"/>
+                                        <FormControlLabel value="Lo escuché" control={<Radio/>} label="Lo escuché"/>
+                                        <FormControlLabel value="Un compañero de trabajo me lo comentó" control={<Radio/>}
                                                           label="Un compañero de trabajo me lo comentó"/>
-                                        <FormControlLabel value="6" control={<Radio/>}
+                                        <FormControlLabel value="Encontré accidentalmente un informe o archivo" control={<Radio/>}
                                                           label="Encontré accidentalmente un informe o archivo"/>
-                                        <FormControlLabel value="7" control={<Radio/>} label="La deduje"/>
-                                        <FormControlLabel value="99" control={<Radio/>} label="Otra"/>
+                                        <FormControlLabel value="La deduje" control={<Radio/>} label="La deduje"/>
+                                        <FormControlLabel value="Otra" control={<Radio/>} label="Otra"/>
                                     </RadioGroup>
                                 </FormControl>
 
-                                {submitData.listado.ComoseEntero == 99 ?
+                                {submitData.listado.ComoseEntero == "Otra" ?
                                     <div className="col s12 respuesta">
                                         <div className="input-field">
                                 <textarea id="textarea1" className="materialize-textarea" onChange={(event) => {
@@ -569,7 +568,7 @@ export default function Formulario () {
                                        onClick={() => {
                                            console.log('next paso');
                                            console.log(steep);
-                                           submitData.listado.queHara == 11 || steep > 8 ? onSubmit(event, submitData)  : setSteep(parseInt(steep + 1));
+                                           submitData.listado.queHara == "Sugerencias y/o Reclamos Internos" || steep > 8 ? onSubmit(event, submitData)  : setSteep(parseInt(steep + 1));
                                        }}>Continuar</a>
                                 </div>
                             </> : ''}

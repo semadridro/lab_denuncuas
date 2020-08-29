@@ -53,7 +53,7 @@ export default function Login () {
                                             />
 
                                             {email.error && <p className="text-red-500 text-xs pt-2">{email.error}</p>}
-                                            <label for="user">Usuario</label>
+                                            <label>Usuario</label>
                                         </div>
                                         <div className="input-field col s12">
                                             <input
@@ -64,7 +64,7 @@ export default function Login () {
                                                 required
                                                 {...password.bind}
                                             />
-                                            <label for="password">Password</label>
+                                            <label>Password</label>
                                         </div>
                                         <div className="input-field col s6">
                                             <a className="olvidepass" href="#">Olvidé mi contraseña</a>

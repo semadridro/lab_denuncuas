@@ -15,7 +15,6 @@ export const register = ({ email, name, password, password_confirmation }) => {
   });
 };
 
-
 export const registroDenuncia = ({ dataJson }) => {
     return client('/api/denuncias/saveDate', { body: { dataJson } })
         .then(({ status }) => status);
@@ -40,4 +39,10 @@ export const getUser = () => {
   return client('/api/me')
     .then(({ data }) => data)
     .catch(() => null);
+};
+
+export const getDenuncias = () => {
+    return client('/api/denuncias/getallDenuncias')
+        .then(({ data }) => data)
+        .catch(() => null);
 };
