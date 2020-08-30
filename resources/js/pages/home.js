@@ -90,14 +90,6 @@ export default function Home () {
                                 title="Listado Denuncias "
                                 columns={dataColumns}
                                 data={dataRow}
-                                actions={[
-                                    {
-                                        icon: 'visibilityIcon',
-                                        tooltip: 'Detalle',
-                                        //onClick: (event, rowData) => alert("You saved " + rowData.name)
-                                        onClick: (event, rowData)  =>  window.location.href='/detalle/'+ rowData.id
-                                    }
-                                ]}
                                 options={{
                                     search: false,
                                     toolbar: false,
