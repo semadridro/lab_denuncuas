@@ -46,3 +46,9 @@ export const getDenuncias = () => {
         .then(({ data }) => data)
         .catch(() => null);
 };
+
+export const getDetalleDenuncia = ({ id_denuncia }) => {
+    return client('/api/denuncias/getDetaleDenuncia',  { body: { id_denuncia } })
+        .then(({ data }) => data)
+        .catch(() => null);
+};

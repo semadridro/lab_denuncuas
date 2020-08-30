@@ -27,7 +27,6 @@ Route::name('api.')->namespace('Api')->group(function () {
 
             Route::post('denuncias/saveDate', 'DenunciasController')->name('register');
 
-            Route::get('denuncias/getallDenuncias', 'DenunciasController@getallDenuncias');
         });
     });
 
@@ -36,6 +35,8 @@ Route::name('api.')->namespace('Api')->group(function () {
         Route::namespace('Auth')->group(function () {
             Route::get('me', 'MeController@me')->name('me');
             Route::post('logout', 'LogoutController@logout')->name('logout');
+
+            Route::post('denuncias/getDetaleDenuncia', 'DenunciasController@getDetaleDenuncia');
 
             Route::get('denuncias/getallDenuncias', 'DenunciasController@getallDenuncias');
 

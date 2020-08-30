@@ -58,5 +58,13 @@ class DenunciasController extends Controller
 
         return response()->json(['data' => $denuncias ], 200);
     }
+
+
+    public function getDetaleDenuncia (Request $request) {
+
+        $denuncias = Denuncias::select()->where("id", "=", $request->id_denuncia)->first();
+        return response()->json(['data' => $denuncias ], 200);
+
+    }
 }
 
