@@ -81,13 +81,13 @@ export default function Home () {
 
     return (
         <>
+            <BottomNavigation value={value} onChange={handleChange} className={classes.root}>
+                <BottomNavigationAction label="Pendientes" value="Pendientes" onClick={()=> changeState(0)} icon={<WatchLaterIcon />} />
+                <BottomNavigationAction label="Procesando" value="Procesando" onClick={()=> changeState(1)} icon={<AutorenewIcon />} />
+                <BottomNavigationAction label="Concluidas" value="Concluidas" onClick={()=> changeState(2)} icon={<CheckBoxIcon />} />
+                <BottomNavigationAction label="Spam" value="Spam" onClick={()=> changeState(3)} icon={<BlockIcon />} />
+            </BottomNavigation>
             <Container>
-                <BottomNavigation value={value} onChange={handleChange} className={classes.root}>
-                    <BottomNavigationAction label="Pendientes" value="Pendientes" onClick={()=> changeState(0)} icon={<WatchLaterIcon />} />
-                    <BottomNavigationAction label="Procesando" value="Procesando" onClick={()=> changeState(1)} icon={<AutorenewIcon />} />
-                    <BottomNavigationAction label="Concluidas" value="Concluidas" onClick={()=> changeState(2)} icon={<CheckBoxIcon />} />
-                    <BottomNavigationAction label="Spam" value="Spam" onClick={()=> changeState(3)} icon={<BlockIcon />} />
-                </BottomNavigation>
 
                 <div className={classes.root}>
                     <Grid container spacing={3}>
