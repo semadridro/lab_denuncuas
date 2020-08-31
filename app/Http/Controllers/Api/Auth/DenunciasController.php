@@ -6,7 +6,6 @@ use App\Denuncias;
 use App\ProcesoDenuncia;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\UserResource;
 
 class DenunciasController extends Controller
 {
@@ -60,7 +59,11 @@ class DenunciasController extends Controller
 
     public function getDetaleDenuncia (Request $request) {
 
-        $denuncias = Denuncias::select()->where("id", "=", $request->id_denuncia)->first();
+        $denuncias = Denuncias::select()
+            ->leftJoin("proceso_denuncia", "proceso_denuncia.id_denuncia", "=", "reg_denuncias.id")
+            ->where("reg_denuncias.id", "=", $request->id_denuncia)
+            ->first();
+
         return response()->json(['data' => $denuncias ], 200);
 
     }
@@ -85,5 +88,16 @@ class DenunciasController extends Controller
 
         Denuncias::where('id', $datos->id_denuncia)
             ->update(['id_estado' => $datos->id_estado]);
+    }
+
+    public function getDenunciaCodigo (Request $request) {
+
+        $denuncias = Denuncias::select()
+            ->leftJoin("proceso_denuncia", "proceso_denuncia.id_denuncia", "=", "reg_denuncias.id")
+            ->where("reg_denuncias.codigo", "=", $request->codigo)
+            ->first();
+
+        return response()->json(['data' => $denuncias ], 200);
+
     }
 }

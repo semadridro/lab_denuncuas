@@ -52,6 +52,11 @@ export const getDetalleDenuncia = ({ id_denuncia }) => {
         .then(({ data }) => data)
         .catch(() => null);
 };
+export const getDenunciaCodigo = ({ codigo }) => {
+    return client('/api/DenunciasCodigo',  { body: { codigo } })
+        .then(({ data }) => data)
+        .catch(() => null);
+};
 export const postChangeDenuncia = ({ datos }) => {
     return client('/api/denuncias/postChangeDenuncia',  { body: { datos } })
         .then(({ data }) => data)

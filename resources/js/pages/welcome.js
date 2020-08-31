@@ -1,5 +1,6 @@
 import React, { useEffect, Fragment } from "react";
 import Formulario from './formulario';
+import BuscoDenuncia from './buscoCodigo';
 
 import M from "materialize-css/dist/js/materialize.min.js";
 import Header from './header';
@@ -72,55 +73,7 @@ export default function Deuncias () {
                                 </div>
 
                                 <div id="formseguimiento" className="col s12">
-                                    <div className="space-30"></div>
-                                    <div className="row center">
-
-                                        <div className="col s12">
-                                            <p><b>Puede ingresar a continuación el código de su denuncia para obtener el
-                                                estado de avance.</b></p>
-                                        </div>
-                                        <div className="space-30"></div>
-                                        <div className="input-field col s12 fix">
-                                            <input id="first_name" type="text" className="validate"/>
-                                                <label htmlFor="first_name">Código de seguimiento</label>
-                                                <div className="space-30"></div>
-                                                <a className="waves-effect btn btn-large btn-next btn-first z-depth-0 blue lighten-1">Consultar</a>
-                                        </div>
-
-                                        <div className="space-30"></div>
-                                        {/*<div className="col s12">
-                                            <p><b>El estado de su denuncia es el siguiente.</b></p>
-                                        </div>
-                                            <div className="col s12">
-                                            <table>
-                                            <tbody>
-                                            <tr className="border-top">
-                                            <td className="min-width-table desc">Código de denuncia</td>
-                                            <td> RAYU-6U7P-T34P</td>
-
-                                            </tr>
-                                            <tr>
-                                            <td className="desc">Fecha de solicitud realizada</td>
-                                            <td>26/06/2020 09:16 pm</td>
-                                            </tr>
-                                            <tr>
-                                            <td className="desc">Estado</td>
-                                            <td>Procesando</td>
-                                            </tr>
-                                            <tr>
-                                            <td className="desc">Mensaje</td>
-                                            <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
-                                            blandit augue lacus, eu efficitur purus euismod ut. Praesent
-                                            viverra nisl vel lorem posuere convallis. Duis sit amet tempor
-                                            arcu, vitae porta purus.
-                                            </td>
-                                            </tr>
-                                            </tbody>
-                                            </table>
-                                            </div>*/}
-                                    </div>
-
-
+                                    <BuscoDenuncia />
                                 </div>
 
                             </div>

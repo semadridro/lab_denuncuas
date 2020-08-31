@@ -27,6 +27,8 @@ Route::name('api.')->namespace('Api')->group(function () {
 
             Route::post('denuncias/saveDate', 'DenunciasController')->name('register');
 
+            Route::post('denuncias/getDenunciaCodigo', 'DenunciasController@getDenunciaCodigo');
+
         });
     });
 
@@ -44,5 +46,6 @@ Route::name('api.')->namespace('Api')->group(function () {
 
         });
     });
+    Route::post('DenunciasCodigo', 'DenunciasCodigoController@buscocodigo');
 });
 

@@ -139,6 +139,7 @@ export default function DetalleDenuncia (props) {
     const handlerSubmit = () => {
 
         console.log(submitData);
+        setOpen(true);
 
         let jsonData = JSON.stringify(submitData);
         postChangeDenuncia({datos: jsonData})
@@ -152,6 +153,7 @@ export default function DetalleDenuncia (props) {
                     console.log(errors);
                 });
             });
+        props.history.goBack()
     };
 
 
@@ -288,12 +290,28 @@ export default function DetalleDenuncia (props) {
                                         justify="flex-end"
                                         alignItems="center"
                                     >
-                                        <Button variant="contained" color="primary" onClick={() => handlerSubmit}>
+                                        <Button variant="contained" color="primary" onClick={handlerSubmit}>
                                             <CheckBoxIcon /> Concluir
                                         </Button>
                                     </Grid>
                                 </Grid>
 
+                            </Paper>
+                        </Grid> : ''}
+                        {dataRow.id_estado == 2 ? <Grid item m={4} xs={4}>
+                            <Paper className={classes.paper} elevation={3}>
+                                <Grid container spacing={3}>
+                                    <Grid item xs={12}>
+                                        <Typography variant="h5" gutterBottom>
+                                            Mensaje enviado a denunciantes
+                                        </Typography>
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        <Typography variant="h6" gutterBottom>
+                                            {dataRow.respuesta}
+                                        </Typography>
+                                    </Grid>
+                                </Grid>
                             </Paper>
                         </Grid> : ''}
                     </Grid>
