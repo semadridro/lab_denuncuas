@@ -1,6 +1,8 @@
 import React, {useState, useEffect, useReducer, useContext} from 'react';
 import {useAuth} from '../context/auth';
-import {getDetalleDenuncia, getUser} from '../api/auth';
+import {getDetalleDenuncia, postChangeDenuncia, postChangeStatus,getUser} from '../api/auth';
+
+import { browserHistory } from 'react-router'
 
 import {makeStyles} from '@material-ui/core/styles';
 import {getIntendedUrl, getToken} from '../utils/auth';
@@ -14,11 +16,23 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
+import AutorenewIcon from '@material-ui/icons/Autorenew';
+import BlockIcon from '@material-ui/icons/Block';
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+
+import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
+
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -56,10 +70,26 @@ export default function DetalleDenuncia (props) {
     console.log(props);
     console.log(props.match.params.id);
 
+
     const classes = useStyles();
     const id_denuncia = props.match.params.id;
     const [dataRow, setDataRows] = useState([]);
     const [dataAdicional, setDataAdicional] = useState([]);
+
+    const [open, setOpen] = React.useState(false);
+
+    const handleClick = () => {
+        setOpen(true);
+    };
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpen(false);
+    };
+
 
     const fetchDenuncias = (id_denuncia) => {
 
@@ -78,8 +108,16 @@ export default function DetalleDenuncia (props) {
     }, []);
 
     const [state, setState] = React.useState({
-        Estado: 0,
+        Estado: dataRow.id_estado ? dataRow.id_estado : 0,
         name: 'Pendiente',
+    });
+
+    const [submitData, setSubmitData] = useState({
+        listado: {
+            id_denuncia: id_denuncia,
+            id_estado: dataRow.id_estado ? dataRow.id_estado : 0,
+            mensaje: '',
+        },
     });
 
     const handleChange = (event) => {
@@ -88,7 +126,61 @@ export default function DetalleDenuncia (props) {
             ...state,
             [name]: event.target.value,
         });
+
+        setSubmitData({
+            ...submitData,
+            listado: {
+                ...submitData.listado,
+                id_estado: event.target.value
+            }
+        });
     };
+
+    const handlerSubmit = () => {
+
+        console.log(submitData);
+
+        let jsonData = JSON.stringify(submitData);
+        postChangeDenuncia({datos: jsonData})
+            .then((data) => {
+                console.log(data);
+                /*setDataRows(data);
+                setDataAdicional(JSON.parse(data.dataJson));*/
+            })
+            .catch(error => {
+                error.json().then(({errors}) => {
+                    console.log(errors);
+                });
+            });
+    };
+
+
+    const handlerChangeStatus = (id_estado) => {
+        setOpen(true);
+
+        let tempData = {
+            id_estado: id_estado,
+            id_denuncia: id_denuncia
+        };
+
+        let jsonData = JSON.stringify(tempData);
+
+        postChangeStatus({datos: jsonData})
+            .then((data) => {
+                console.log(data);
+                //props.history.goBack()
+                /*setDataRows(data);
+                setDataAdicional(JSON.parse(data.dataJson));*/
+            })
+            .catch(error => {
+                error.json().then(({errors}) => {
+                    console.log(errors);
+                });
+            });
+
+        props.history.goBack()
+
+    }
 
     return (
         <>
@@ -97,18 +189,17 @@ export default function DetalleDenuncia (props) {
                 {console.log(dataRow)}
                 {console.log(dataAdicional)}
                 <div className={classes.root}>
-                    <Grid container spacing={3}>
-                        <Grid item m={8} xs={8}>
+                    <Grid container spacing={3} direction="row" ustify="center">
+                        <Grid item xs={8}>
                             <Paper className={classes.paper} elevation={3}>
-                                <Grid container spacing={3}>
+                                <Grid container spacing={3} direction="row" ustify="center">
                                     <Grid item xs={12}>
                                         <Typography variant="h5" gutterBottom>
-                                            Denuncia
+                                            <Button color="primary" onClick={() => props.history.goBack()}> <ArrowBackIosIcon /></Button>  Denuncia
                                         </Typography>
                                     </Grid>
 
                                     <Grid item xs={12}>
-
 
                                         <table className={'highlight'}>
                                             <tbody>
@@ -126,7 +217,7 @@ export default function DetalleDenuncia (props) {
                                             </tr>
                                             <tr>
                                                 <td>Tipo de denuncia</td>
-                                                <td>{dataRow.tip_denuncia}</td>
+                                                <td>{dataRow.tipo_denuncia}</td>
                                             </tr>
                                             <tr>
                                                 <td>Personas comprometidas</td>
@@ -144,60 +235,75 @@ export default function DetalleDenuncia (props) {
                                         </table>
                                     </Grid>
                                 </Grid>
+                                {dataRow.id_estado == 0 || dataRow.id_estado == null ?
+                                <Grid
+                                    container
+                                    direction="row"
+                                    justify="flex-end"
+                                    alignItems="center"
+                                >
+                                    <Button variant="contained" color="primary" onClick={() => handlerChangeStatus(1)}>
+                                        <AutorenewIcon /> Procesar
+                                    </Button>
+                                    <Button variant="contained" color="secondary" onClick={() => handlerChangeStatus(3)}>
+                                        <BlockIcon />
+                                    </Button>
+
+                                </Grid> : '' }
 
                             </Paper>
                         </Grid>
-                        <Grid item m={4} xs={4}>
+                        {dataRow.id_estado == 1 ? <Grid item m={4} xs={4}>
                             <Paper className={classes.paper} elevation={3}>
                                 <Grid container spacing={3}>
                                     <Grid item xs={12}>
                                         <Typography variant="h5" gutterBottom>
-                                            Acciones
+                                            Mensaje
                                         </Typography>
-                                    </Grid>
-                                    <Grid item xs={12}>
-                                        <FormControl variant="outlined" className={classes.formControl}>
-                                            <InputLabel htmlFor="outlined-age-native-simple">Estado</InputLabel>
-                                            <Select
-                                                native
-                                                value={state.Estado}
-                                                onChange={handleChange}
-                                                label="Estado"
-                                                inputProps={{
-                                                    name: 'Estado',
-                                                    id: 'outlined-age-native-simple',
-                                                }}
-                                            >
-                                                <option aria-label="None" value="" />
-                                                <option value={0}>Pendiente</option>
-                                                <option value={1}>Procesando</option>
-                                                <option value={2}>Concluidas</option>
-                                                <option value={3}>Spam</option>
-                                            </Select>
-                                        </FormControl>
                                     </Grid>
                                     <Grid item xs={12}>
                                         <TextField
                                             className={classes.formControl}
                                             id="standard-multiline-static"
-                                            label="Escibe un mensaje a la persona"
+                                            label="Escribe un mensaje a la persona"
                                             multiline
                                             rows={4}
                                             variant="outlined"
+                                            onChange={(event) => {
+                                                event.persist();
+                                                submitData.listado.mensaje = event.target.value;
+                                                setSubmitData({
+                                                    ...submitData,
+                                                    listado: {
+                                                        ...submitData.listado,
+                                                        mensaje: event.target.value
+                                                    }
+                                                });
+                                            }}
                                         />
                                     </Grid>
-                                    <Grid item xs={12}>
-                                        <Button variant="contained" color="primary">
-                                            Guardar
+                                    <Grid
+                                        container
+                                        direction="row"
+                                        justify="flex-end"
+                                        alignItems="center"
+                                    >
+                                        <Button variant="contained" color="primary" onClick={() => handlerSubmit}>
+                                            <CheckBoxIcon /> Concluir
                                         </Button>
                                     </Grid>
                                 </Grid>
 
                             </Paper>
-                        </Grid>
+                        </Grid> : ''}
                     </Grid>
                 </div>
+                <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} key={"top" + "center"}>
+                    <Alert onClose={handleClose} severity="success">
+                        Cambio realizado con éxito
+                    </Alert>
+                </Snackbar>
             </Container>
         </>
-);
+    );
 }

@@ -37,8 +37,10 @@ Route::name('api.')->namespace('Api')->group(function () {
             Route::post('logout', 'LogoutController@logout')->name('logout');
 
             Route::post('denuncias/getDetaleDenuncia', 'DenunciasController@getDetaleDenuncia');
+            Route::post('denuncias/postChangeDenuncia', 'DenunciasController@postChangeDenuncia');
+            Route::post('denuncias/postChangeStatus', 'DenunciasController@postChangeStatus');
 
-            Route::get('denuncias/getallDenuncias', 'DenunciasController@getallDenuncias');
+            Route::post('denuncias/getallDenuncias', 'DenunciasController@getallDenuncias');
 
         });
     });

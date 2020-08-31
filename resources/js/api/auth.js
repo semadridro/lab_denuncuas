@@ -41,14 +41,24 @@ export const getUser = () => {
     .catch(() => null);
 };
 
-export const getDenuncias = () => {
-    return client('/api/denuncias/getallDenuncias')
+export const getDenuncias = ( {id_estado} ) => {
+    return client('/api/denuncias/getallDenuncias', { body: { id_estado } })
         .then(({ data }) => data)
         .catch(() => null);
 };
 
 export const getDetalleDenuncia = ({ id_denuncia }) => {
     return client('/api/denuncias/getDetaleDenuncia',  { body: { id_denuncia } })
+        .then(({ data }) => data)
+        .catch(() => null);
+};
+export const postChangeDenuncia = ({ datos }) => {
+    return client('/api/denuncias/postChangeDenuncia',  { body: { datos } })
+        .then(({ data }) => data)
+        .catch(() => null);
+};
+export const postChangeStatus = ({ datos }) => {
+    return client('/api/denuncias/postChangeStatus',  { body: { datos } })
         .then(({ data }) => data)
         .catch(() => null);
 };

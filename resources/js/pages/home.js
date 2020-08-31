@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useReducer, useContext} from 'react';
 import {useAuth} from '../context/auth';
-import {getDenuncias, getUser} from '../api/auth';
+import {getDenuncias, getDetalleDenuncia, getUser} from '../api/auth';
 import {Link} from "react-router-dom";
 
 import {makeStyles} from '@material-ui/core/styles';
@@ -39,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Home () {
 
+    const [estado, setEstado] = useState(0);
     const [dataRow, setDataRows] = useState([]);
     const [dataColumns, setDataColums] = useState([
         { title: 'N° Seguimiento', field: 'codigo' },
@@ -53,9 +54,8 @@ export default function Home () {
     ])
 
     const fetchData = () => {
-        return getToken()
-            ? getDenuncias()
-            : Promise.resolve(null);
+
+        return getDenuncias({id_estado: estado});
     };
 
     useEffect(() => {
@@ -63,7 +63,7 @@ export default function Home () {
             console.log(data);
             setDataRows(data)
         });
-    }, []);
+    }, [estado]);
 
 
     const classes = useStyles();
@@ -73,14 +73,20 @@ export default function Home () {
         setValue(newValue);
     };
 
+    const changeState = (id_estado) => {
+        setDataRows([])
+        console.log(id_estado)
+        setEstado(id_estado)
+    }
+
     return (
         <>
             <Container>
                 <BottomNavigation value={value} onChange={handleChange} className={classes.root}>
-                    <BottomNavigationAction label="Pendientes" value="Pendientes" icon={<WatchLaterIcon />} />
-                    <BottomNavigationAction label="Procesando" value="Procesando" icon={<AutorenewIcon />} />
-                    <BottomNavigationAction label="Concluidas" value="Concluidas" icon={<CheckBoxIcon />} />
-                    <BottomNavigationAction label="Spam" value="Spam" icon={<BlockIcon />} />
+                    <BottomNavigationAction label="Pendientes" value="Pendientes" onClick={()=> changeState(0)} icon={<WatchLaterIcon />} />
+                    <BottomNavigationAction label="Procesando" value="Procesando" onClick={()=> changeState(1)} icon={<AutorenewIcon />} />
+                    <BottomNavigationAction label="Concluidas" value="Concluidas" onClick={()=> changeState(2)} icon={<CheckBoxIcon />} />
+                    <BottomNavigationAction label="Spam" value="Spam" onClick={()=> changeState(3)} icon={<BlockIcon />} />
                 </BottomNavigation>
 
                 <div className={classes.root}>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Auth;
 
 use App\Denuncias;
+use App\ProcesoDenuncia;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
@@ -46,13 +47,10 @@ class DenunciasController extends Controller
 
     public function getallDenuncias (Request $request){
 
-        $denuncias = Denuncias::select("codigoReg AS codigo", "created_at AS fecha", "tipo_denuncia AS tipo", "mensaje", "id");
-
-        if (!isset($request)){
-            $denuncias = $denuncias->where("id_estado", "=", $request->id_estado);
-        }
-
-        $denuncias = $denuncias->get();
+        $denuncias = Denuncias::select("codigoReg AS codigo", "created_at AS fecha", "tipo_denuncia AS tipo", "mensaje", "id")
+            ->where("id_estado", "=", $request->id_estado)
+            ->orderBy('id', 'desc')
+            ->get();
 
         //return response()->json(['data' => trans($denuncias)], 200);
 
@@ -66,5 +64,26 @@ class DenunciasController extends Controller
         return response()->json(['data' => $denuncias ], 200);
 
     }
-}
 
+    public function postChangeDenuncia (Request $request){
+        $datosTemp = json_decode($request->datos);
+        $datos = $datosTemp->listado;
+
+        Denuncias::where('id', $datos->id_denuncia)
+            ->update(['id_estado' => 2]);
+
+        ProcesoDenuncia::create ([
+            "id_denuncia" => $datos->id_denuncia,
+            "respuesta"=> $datos->mensaje
+        ]);
+
+    }
+
+    public function postChangeStatus (Request $request){
+
+        $datos = json_decode($request->datos);
+
+        Denuncias::where('id', $datos->id_denuncia)
+            ->update(['id_estado' => $datos->id_estado]);
+    }
+}

@@ -57,7 +57,6 @@ export default function Formulario () {
     const form = useRef(null);
     const [resetFeedback, setResetFeedback] = useState('');
 
-
     const onSubmit = async (event, submitData) => {
         setloading(true);
         console.log('guardo la data');
@@ -94,14 +93,14 @@ export default function Formulario () {
         registroDenuncia({dataJson: jsonData})
             .then(status => {
                 console.log('status.status');
-                console.log(status)
+                console.log(status);
                 setResetFeedback(status);
-                let stCodigo  = status
-                console.log('stCodigo')
-                console.log(stCodigo)
-                console.log(resetFeedback)
-                console.log(codigo)
-                console.log(status)
+                let stCodigo = status;
+                console.log('stCodigo');
+                console.log(stCodigo);
+                console.log(resetFeedback);
+                console.log(codigo);
+                console.log(status);
             })
             .catch(error => {
                 error.json().then(({errors}) => {
@@ -110,7 +109,8 @@ export default function Formulario () {
             });
     };
 
-    {/*  <div className="col s12"><LinearProgress/> Denuncia realiza con éxito, el código asignado es <b>{Math.random().toString(36).slice(2)}</b></div> : resetFeedback != '' ?*/}
+    {/*  <div className="col s12"><LinearProgress/> Denuncia realiza con éxito, el código asignado es <b>{Math.random().toString(36).slice(2)}</b></div> : resetFeedback != '' ?*/
+    }
     return (
         <>
             <FormControl onSubmit={onSubmit} ref={form}>
@@ -125,98 +125,101 @@ export default function Formulario () {
                         </blockquote>
                     </div>
                     {loading ? <div className="col s12">
-                            <Alert variant="filled" severity="success">
-                                Denuncia realiza con éxito, el código asignado es <b>{codigo}</b>
-                            </Alert>
-                        </div> : <>
+                        <Alert variant="filled" severity="success">
+                            Denuncia realiza con éxito, el código asignado es <b>{codigo}</b>
+                        </Alert>
+                    </div> : <>
 
-                            {steep == 0 ? <div className="col s12">
-                                <a className="waves-effect btn btn-large btn-next btn-first z-depth-0 blue lighten-1"
-                                   onClick={() => {
-                                       console.log('STEEEP');
-                                       console.log(steep);
-                                       setSteep(1);
-                                   }}>Comenzar</a>
-                            </div> : ''}
+                        {steep == 0 ? <div className="col s12">
+                            <a className="waves-effect btn btn-large btn-next btn-first z-depth-0 blue lighten-1"
+                               onClick={() => {
+                                   console.log('STEEEP');
+                                   console.log(steep);
+                                   setSteep(1);
+                               }}>Comenzar</a>
+                        </div> : ''}
 
-                            {steep == 1 ? <>
-                                <div className="col s12 pregunta">
-                                    <h5>¿Desea Usted identificarse para efectos de su denuncia?</h5>
-                                </div>
+                        {steep == 1 ? <>
+                            <div className="col s12 pregunta">
+                                <h5>¿Desea Usted identificarse para efectos de su denuncia?</h5>
+                            </div>
 
-                                <FormControl className={classes.formControl}>
-                                    <RadioGroup aria-label="gender" name="gender1"
-                                                value={submitData.listado.identificarse}
-                                                onChange={(event) => {
-                                                    event.persist();
-                                                    console.log(submitData);
-                                                    submitData.listado.identificarse = event.target.value;
-                                                    setSubmitData({
-                                                        ...submitData,
-                                                        listado: {
-                                                            ...submitData.listado,
-                                                            identificarse: event.target.value
-                                                        }
-                                                    });
-                                                    console.log(event.target.value);
-                                                    console.log(submitData);
-                                                }}>
-                                        <FormControlLabel value="si" control={<Radio/>} label="Si"/>
-                                        <FormControlLabel value="no" control={<Radio/>} label="No"/>
-                                    </RadioGroup>
-                                </FormControl>
+                            <FormControl className={classes.formControl}>
+                                <RadioGroup aria-label="gender" name="gender1"
+                                            value={submitData.listado.identificarse}
+                                            onChange={(event) => {
+                                                event.persist();
+                                                console.log(submitData);
+                                                submitData.listado.identificarse = event.target.value;
+                                                setSubmitData({
+                                                    ...submitData,
+                                                    listado: {
+                                                        ...submitData.listado,
+                                                        identificarse: event.target.value
+                                                    }
+                                                });
+                                                console.log(event.target.value);
+                                                console.log(submitData);
+                                            }}>
+                                    <FormControlLabel value="si" control={<Radio/>} label="Si"/>
+                                    <FormControlLabel value="no" control={<Radio/>} label="No"/>
+                                </RadioGroup>
+                            </FormControl>
 
-                                {submitData.listado.identificarse == 'si' ? <div className="col s12 respuesta">
-                                    <label htmlFor="first_name">Nombres y Apellidos</label>
-                                    <input placeholder="Nombres y Apellidos" id="first_name" type="text"
-                                           className="validate"
-                                           required onChange={(event) => {
-                                        event.persist();
-                                        console.log(submitData);
-                                        submitData.listado.nomnbreApellido = event.target.value;
-                                        setSubmitData({
-                                            ...submitData,
-                                            listado: {...submitData.listado, nomnbreApellido: event.target.value}
-                                        });
-                                        console.log(event.target.value);
-                                        console.log(submitData);
-                                    }}/>
-                                </div> : ''} </> : ''}
+                            {submitData.listado.identificarse == 'si' ? <div className="col s12 respuesta">
+                                <label htmlFor="first_name">Nombres y Apellidos</label>
+                                <input placeholder="Nombres y Apellidos" id="first_name" type="text"
+                                       className="validate"
+                                       required onChange={(event) => {
+                                    event.persist();
+                                    console.log(submitData);
+                                    submitData.listado.nomnbreApellido = event.target.value;
+                                    setSubmitData({
+                                        ...submitData,
+                                        listado: {...submitData.listado, nomnbreApellido: event.target.value}
+                                    });
+                                    console.log(event.target.value);
+                                    console.log(submitData);
+                                }}/>
+                            </div> : ''} </> : ''}
 
 
-                            {steep == 2 ? <>
-                                <div className="col s12 pregunta">
-                                    <h5>¿Cuál es su relación con la compañía?</h5>
-                                </div>
-                                <FormControl className={classes.formControl}>
-                                    <RadioGroup aria-label="gender" name="gender1"
-                                                value={submitData.listado.relacionCompany || 0}
-                                                onChange={(event) => {
-                                                    event.persist();
-                                                    console.log(submitData);
-                                                    submitData.listado.relacionCompany = event.target.value;
-                                                    setSubmitData({
-                                                        ...submitData,
-                                                        listado: {
-                                                            ...submitData.listado,
-                                                            relacionCompany: event.target.value
-                                                        }
-                                                    });
-                                                    console.log(event.target.value);
-                                                    console.log(submitData);
-                                                }}>
-                                        <FormControlLabel value="Trabjador de Emiliana" control={<Radio/>} label="Trabjador de Emiliana"/>
-                                        <FormControlLabel value="Cliente destribuidor" control={<Radio/>} label="Cliente destribuidor"/>
-                                        <FormControlLabel value="Cliente consumidor" control={<Radio/>} label="Cliente consumidor"/>
-                                        <FormControlLabel value="Proveedor" control={<Radio/>} label="Proveedor"/>
-                                        <FormControlLabel value="Contratista" control={<Radio/>} label="Contratista"/>
-                                        <FormControlLabel value="Otro" control={<Radio/>} label="Otro"/>
-                                    </RadioGroup>
-                                </FormControl>
+                        {steep == 2 ? <>
+                            <div className="col s12 pregunta">
+                                <h5>¿Cuál es su relación con la compañía?</h5>
+                            </div>
+                            <FormControl className={classes.formControl}>
+                                <RadioGroup aria-label="gender" name="gender1"
+                                            value={submitData.listado.relacionCompany || 0}
+                                            onChange={(event) => {
+                                                event.persist();
+                                                console.log(submitData);
+                                                submitData.listado.relacionCompany = event.target.value;
+                                                setSubmitData({
+                                                    ...submitData,
+                                                    listado: {
+                                                        ...submitData.listado,
+                                                        relacionCompany: event.target.value
+                                                    }
+                                                });
+                                                console.log(event.target.value);
+                                                console.log(submitData);
+                                            }}>
+                                    <FormControlLabel value="Trabjador de Emiliana" control={<Radio/>}
+                                                      label="Trabjador de Emiliana"/>
+                                    <FormControlLabel value="Cliente destribuidor" control={<Radio/>}
+                                                      label="Cliente destribuidor"/>
+                                    <FormControlLabel value="Cliente consumidor" control={<Radio/>}
+                                                      label="Cliente consumidor"/>
+                                    <FormControlLabel value="Proveedor" control={<Radio/>} label="Proveedor"/>
+                                    <FormControlLabel value="Contratista" control={<Radio/>} label="Contratista"/>
+                                    <FormControlLabel value="Otro" control={<Radio/>} label="Otro"/>
+                                </RadioGroup>
+                            </FormControl>
 
-                                {submitData.listado.relacionCompany == "Otro" ?
-                                    <div className="col s12 respuesta">
-                                        <div className="input-field">
+                            {submitData.listado.relacionCompany == 'Otro' ?
+                                <div className="col s12 respuesta">
+                                    <div className="input-field">
                                 <textarea id="textarea1" className="materialize-textarea" onChange={(event) => {
                                     event.persist();
                                     console.log(submitData);
@@ -228,38 +231,40 @@ export default function Formulario () {
                                     console.log(event.target.value);
                                     console.log(submitData);
                                 }}></textarea>
-                                            <label htmlFor="textarea1">Detalles Otro</label>
-                                        </div>
-                                    </div> : ''}
+                                        <label htmlFor="textarea1">Detalles Otro</label>
+                                    </div>
+                                </div> : ''}
 
-                            </> : ''}
+                        </> : ''}
 
-                            {steep == 3 ? <>
-                                <div className="col s12 pregunta">
-                                    <h5>¿Qué desea hacer?</h5>
-                                </div>
+                        {steep == 3 ? <>
+                            <div className="col s12 pregunta">
+                                <h5>¿Qué desea hacer?</h5>
+                            </div>
 
-                                <FormControl className={classes.formControl}>
-                                    <RadioGroup aria-label="gender" name="gender1" value={submitData.listado.queHara}
-                                                onChange={(event) => {
-                                                    event.persist();
-                                                    console.log(submitData);
-                                                    submitData.listado.queHara = event.target.value;
-                                                    setSubmitData({
-                                                        ...submitData,
-                                                        listado: {...submitData.listado, queHara: event.target.value}
-                                                    });
-                                                    console.log(event.target.value);
-                                                    console.log(submitData);
-                                                }}>
-                                        <FormControlLabel value="Sugerencias y/o Reclamos Internos" control={<Radio/>} label="Sugerencias y/o Reclamos Internos"/>
-                                        <FormControlLabel value="Realizar una denuncia" control={<Radio/>} label="Realizar una denuncia"/>
-                                    </RadioGroup>
-                                </FormControl>
+                            <FormControl className={classes.formControl}>
+                                <RadioGroup aria-label="gender" name="gender1" value={submitData.listado.queHara}
+                                            onChange={(event) => {
+                                                event.persist();
+                                                console.log(submitData);
+                                                submitData.listado.queHara = event.target.value;
+                                                setSubmitData({
+                                                    ...submitData,
+                                                    listado: {...submitData.listado, queHara: event.target.value}
+                                                });
+                                                console.log(event.target.value);
+                                                console.log(submitData);
+                                            }}>
+                                    <FormControlLabel value="Sugerencias y/o Reclamos Internos" control={<Radio/>}
+                                                      label="Sugerencias y/o Reclamos Internos"/>
+                                    <FormControlLabel value="Realizar una denuncia" control={<Radio/>}
+                                                      label="Realizar una denuncia"/>
+                                </RadioGroup>
+                            </FormControl>
 
-                                {submitData.listado.queHara == "Sugerencias y/o Reclamos Internos" ?
-                                    <div className="col s12 respuesta">
-                                        <div className="input-field">
+                            {submitData.listado.queHara == 'Sugerencias y/o Reclamos Internos' ?
+                                <div className="col s12 respuesta">
+                                    <div className="input-field">
                                 <textarea id="textarea1" className="materialize-textarea" onChange={(event) => {
                                     event.persist();
                                     console.log(submitData);
@@ -271,72 +276,80 @@ export default function Formulario () {
                                     console.log(event.target.value);
                                     console.log(submitData);
                                 }}></textarea>
-                                            <label htmlFor="textarea1">Descripción de la sugerencia o reclamo</label>
-                                        </div>
-                                    </div> : ''}
+                                        <label htmlFor="textarea1">Descripción de la sugerencia o reclamo</label>
+                                    </div>
+                                </div> : ''}
 
 
-                            </> : ''}
+                        </> : ''}
 
-                            {steep == 4 ? <>
-                                <div className="col s12 pregunta">
-                                    <h5>Identificación del tipo de denuncia</h5>
-                                </div>
+                        {steep == 4 ? <>
+                            <div className="col s12 pregunta">
+                                <h5>Identificación del tipo de denuncia</h5>
+                            </div>
 
-                                <FormControl className={classes.formControl}>
-                                    <RadioGroup aria-label="gender" name="gender1"
-                                                value={submitData.listado.TipoDenunci}
-                                                onChange={(event) => {
-                                                    event.persist();
-                                                    console.log(submitData);
-                                                    submitData.listado.TipoDenunci = event.target.value;
-                                                    setSubmitData({
-                                                        ...submitData,
-                                                        listado: {
-                                                            ...submitData.listado,
-                                                            TipoDenunci: event.target.value
-                                                        }
-                                                    });
-                                                    console.log(event.target.value);
-                                                    console.log(submitData);
-                                                }}>
-                                        <FormControlLabel value="Aspectos contables y de auditoria" control={<Radio/>}
-                                                          label="Aspectos contables y de auditoria"/>
-                                        <FormControlLabel value="Confidencialidad" control={<Radio/>} label="Confidencialidad"/>
-                                        <FormControlLabel value="Conflicto de interés" control={<Radio/>} label="Conflicto de interés"/>
-                                        <FormControlLabel value="Apropiación indebida y/o desvío de recursos" control={<Radio/>}
-                                                          label="Apropiación indebida y/o desvío de recursos"/>
-                                        <FormControlLabel value="Protección del medio ambiente" control={<Radio/>}
-                                                          label="Protección del medio ambiente"/>
-                                        <FormControlLabel value="Falsificación de contratos, registros o informes" control={<Radio/>}
-                                                          label="Falsificación de contratos, registros o informes"/>
-                                        <FormControlLabel value="Cohecho - Soborno a funcionario público" control={<Radio/>}
-                                                          label="Cohecho - Soborno a funcionario público"/>
-                                        <FormControlLabel value="Cohecho - Soborno entre privados" control={<Radio/>}
-                                                          label="Cohecho - Soborno entre privados"/>
-                                        <FormControlLabel value="Corrupción" control={<Radio/>} label="Corrupción"/>
-                                        <FormControlLabel value="Compra de especies robadas" control={<Radio/>}
-                                                          label="Compra de especies robadas"/>
-                                        <FormControlLabel value="Mal uso de dineros de la empresa (tarjetas de créditos, fondos fijos, etc.)" control={<Radio/>}
-                                                          label="Mal uso de dineros de la empresa (tarjetas de créditos, fondos fijos, etc.)"/>
-                                        <FormControlLabel value="Actuaciones relacionadas con contratistas" control={<Radio/>}
-                                                          label="Actuaciones relacionadas con contratistas"/>
-                                        <FormControlLabel value="Represalias, discriminación" control={<Radio/>}
-                                                          label="Represalias, discriminación"/>
-                                        <FormControlLabel value="Seguridad en el trabajo" control={<Radio/>}
-                                                          label="Seguridad en el trabajo"/>
-                                        <FormControlLabel value="Infracciones relacionadas con valores o títulos" control={<Radio/>}
-                                                          label="Infracciones relacionadas con valores o títulos"/>
-                                        <FormControlLabel value="Acoso sexual" control={<Radio/>} label="Acoso sexual"/>
-                                        <FormControlLabel value="Acoso laboral" control={<Radio/>} label="Acoso laboral"/>
-                                        <FormControlLabel value="Otros" control={<Radio/>} label="Otros"/>
-                                    </RadioGroup>
-                                </FormControl>
+                            <FormControl className={classes.formControl}>
+                                <RadioGroup aria-label="gender" name="gender1"
+                                            value={submitData.listado.TipoDenunci}
+                                            onChange={(event) => {
+                                                event.persist();
+                                                console.log(submitData);
+                                                submitData.listado.TipoDenunci = event.target.value;
+                                                setSubmitData({
+                                                    ...submitData,
+                                                    listado: {
+                                                        ...submitData.listado,
+                                                        TipoDenunci: event.target.value
+                                                    }
+                                                });
+                                                console.log(event.target.value);
+                                                console.log(submitData);
+                                            }}>
+                                    <FormControlLabel value="Aspectos contables y de auditoria" control={<Radio/>}
+                                                      label="Aspectos contables y de auditoria"/>
+                                    <FormControlLabel value="Confidencialidad" control={<Radio/>}
+                                                      label="Confidencialidad"/>
+                                    <FormControlLabel value="Conflicto de interés" control={<Radio/>}
+                                                      label="Conflicto de interés"/>
+                                    <FormControlLabel value="Apropiación indebida y/o desvío de recursos"
+                                                      control={<Radio/>}
+                                                      label="Apropiación indebida y/o desvío de recursos"/>
+                                    <FormControlLabel value="Protección del medio ambiente" control={<Radio/>}
+                                                      label="Protección del medio ambiente"/>
+                                    <FormControlLabel value="Falsificación de contratos, registros o informes"
+                                                      control={<Radio/>}
+                                                      label="Falsificación de contratos, registros o informes"/>
+                                    <FormControlLabel value="Cohecho - Soborno a funcionario público" control={<Radio/>}
+                                                      label="Cohecho - Soborno a funcionario público"/>
+                                    <FormControlLabel value="Cohecho - Soborno entre privados" control={<Radio/>}
+                                                      label="Cohecho - Soborno entre privados"/>
+                                    <FormControlLabel value="Corrupción" control={<Radio/>} label="Corrupción"/>
+                                    <FormControlLabel value="Compra de especies robadas" control={<Radio/>}
+                                                      label="Compra de especies robadas"/>
+                                    <FormControlLabel
+                                        value="Mal uso de dineros de la empresa (tarjetas de créditos, fondos fijos, etc.)"
+                                        control={<Radio/>}
+                                        label="Mal uso de dineros de la empresa (tarjetas de créditos, fondos fijos, etc.)"/>
+                                    <FormControlLabel value="Actuaciones relacionadas con contratistas"
+                                                      control={<Radio/>}
+                                                      label="Actuaciones relacionadas con contratistas"/>
+                                    <FormControlLabel value="Represalias, discriminación" control={<Radio/>}
+                                                      label="Represalias, discriminación"/>
+                                    <FormControlLabel value="Seguridad en el trabajo" control={<Radio/>}
+                                                      label="Seguridad en el trabajo"/>
+                                    <FormControlLabel value="Infracciones relacionadas con valores o títulos"
+                                                      control={<Radio/>}
+                                                      label="Infracciones relacionadas con valores o títulos"/>
+                                    <FormControlLabel value="Acoso sexual" control={<Radio/>} label="Acoso sexual"/>
+                                    <FormControlLabel value="Acoso laboral" control={<Radio/>} label="Acoso laboral"/>
+                                    <FormControlLabel value="Otros" control={<Radio/>} label="Otros"/>
+                                </RadioGroup>
+                            </FormControl>
 
 
-                                {submitData.listado.TipoDenunci == "Otros" ?
-                                    <div className="col s12 respuesta">
-                                        <div className="input-field">
+                            {submitData.listado.TipoDenunci == 'Otros' ?
+                                <div className="col s12 respuesta">
+                                    <div className="input-field">
                                 <textarea id="textarea1" className="materialize-textarea" onChange={(event) => {
                                     event.persist();
                                     console.log(submitData);
@@ -348,95 +361,96 @@ export default function Formulario () {
                                     console.log(event.target.value);
                                     console.log(submitData);
                                 }}></textarea>
-                                            <label htmlFor="textarea1">Indicar</label>
-                                        </div>
-                                    </div> : ''}
+                                        <label htmlFor="textarea1">Indicar</label>
+                                    </div>
+                                </div> : ''}
 
-                            </> : ''}
-
-
-                            {steep == 5 ? <>
-                                <div className="col s12 pregunta">
-                                    <h5>¿Puede indicar donde sucedieron los hechos de su denuncia?</h5>
-                                </div>
-
-                                <FormControl className={classes.formControl}>
-                                    <RadioGroup aria-label="gender" name="gender1"
-                                                value={submitData.listado.IndentificarLugarHechos}
-                                                onChange={(event) => {
-                                                    event.persist();
-                                                    console.log(submitData);
-                                                    submitData.listado.IndentificarLugarHechos = event.target.value;
-                                                    setSubmitData({
-                                                        ...submitData,
-                                                        listado: {
-                                                            ...submitData.listado,
-                                                            IndentificarLugarHechos: event.target.value
-                                                        }
-                                                    });
-                                                    console.log(event.target.value);
-                                                    console.log(submitData);
-                                                }}>
-                                        <FormControlLabel value="si" control={<Radio/>} label="Si"/>
-                                        <FormControlLabel value="no" control={<Radio/>} label="No"/>
-                                    </RadioGroup>
-                                </FormControl>
-
-                                {submitData.listado.IndentificarLugarHechos == 'si' ?
-                                    <div className="col s12 respuesta">
-                                        <div className="input-field">
-                                <textarea id="textarea1" className="materialize-textarea" onChange={(event) => {
-                                    event.persist();
-                                    console.log(submitData);
-                                    submitData.listado.IndentificarLugarHechosDetalle = event.target.value;
-                                    setSubmitData({
-                                        ...submitData,
-                                        listado: {
-                                            ...submitData.listado,
-                                            IndentificarLugarHechosDetalle: event.target.value
-                                        }
-                                    });
-                                    console.log(event.target.value);
-                                    console.log(submitData);
-                                }}></textarea>
-                                            <label htmlFor="textarea1">Nombrar lugar o licación donde sucedieron los
-                                                hechos</label>
-                                        </div>
-                                    </div> : ''}
-                            </> : ''}
+                        </> : ''}
 
 
-                            {steep == 6 ? <>
-                                <div className="col s12 pregunta">
-                                    <h5>¿Puede indicar cuando (fecha exacta o aproximada) sucedieron los hechos de su
-                                        denuncia?</h5>
-                                </div>
+                        {steep == 5 ? <>
+                            <div className="col s12 pregunta">
+                                <h5>¿Puede indicar donde sucedieron los hechos de su denuncia?</h5>
+                            </div>
 
-                                <FormControl className={classes.formControl}>
-                                    <RadioGroup aria-label="gender" name="gender1"
-                                                value={submitData.listado.IdentificarFecha}
-                                                onChange={(event) => {
-                                                    event.persist();
-                                                    console.log(submitData);
-                                                    submitData.listado.IdentificarFecha = event.target.value;
-                                                    setSubmitData({
-                                                        ...submitData,
-                                                        listado: {
-                                                            ...submitData.listado,
-                                                            IdentificarFecha: event.target.value
-                                                        }
-                                                    });
-                                                    console.log(event.target.value);
-                                                    console.log(submitData);
-                                                }}>
-                                        <FormControlLabel value="si" control={<Radio/>} label="Si"/>
-                                        <FormControlLabel value="no" control={<Radio/>} label="No"/>
-                                    </RadioGroup>
-                                </FormControl>
+                            <FormControl className={classes.formControl}>
+                                <RadioGroup aria-label="gender" name="gender1"
+                                            value={submitData.listado.IndentificarLugarHechos}
+                                            onChange={(event) => {
+                                                event.persist();
+                                                console.log(submitData);
+                                                submitData.listado.IndentificarLugarHechos = event.target.value;
+                                                setSubmitData({
+                                                    ...submitData,
+                                                    listado: {
+                                                        ...submitData.listado,
+                                                        IndentificarLugarHechos: event.target.value
+                                                    }
+                                                });
+                                                console.log(event.target.value);
+                                                console.log(submitData);
+                                            }}>
+                                    <FormControlLabel value="si" control={<Radio/>} label="Si"/>
+                                    <FormControlLabel value="no" control={<Radio/>} label="No"/>
+                                </RadioGroup>
+                            </FormControl>
 
-                                {submitData.listado.IdentificarFecha == 'si' ?
-                                    <div className="col s12 respuesta">
-                                        <div className="input-field">
+                            {submitData.listado.IndentificarLugarHechos == 'si' ?
+                                <div className="col s12 respuesta">
+                                    <div className="input-field">
+                                <textarea id="textarea1" className="materialize-textarea"
+                                          onChange={(event) => {
+                                              event.persist();
+                                              console.log(submitData);
+                                              submitData.listado.IndentificarLugarHechosDetalle = event.target.value;
+                                              setSubmitData({
+                                                  ...submitData,
+                                                  listado: {
+                                                      ...submitData.listado,
+                                                      IndentificarLugarHechosDetalle: event.target.value
+                                                  }
+                                              });
+                                              console.log(event.target.value);
+                                              console.log(submitData);
+                                          }}></textarea>
+                                        <label htmlFor="textarea1">Nombrar lugar o licación donde sucedieron los
+                                            hechos</label>
+                                    </div>
+                                </div> : ''}
+                        </> : ''}
+
+
+                        {steep == 6 ? <>
+                            <div className="col s12 pregunta">
+                                <h5>¿Puede indicar cuando (fecha exacta o aproximada) sucedieron los hechos de su
+                                    denuncia?</h5>
+                            </div>
+
+                            <FormControl className={classes.formControl}>
+                                <RadioGroup aria-label="gender" name="gender1"
+                                            value={submitData.listado.IdentificarFecha}
+                                            onChange={(event) => {
+                                                event.persist();
+                                                console.log(submitData);
+                                                submitData.listado.IdentificarFecha = event.target.value;
+                                                setSubmitData({
+                                                    ...submitData,
+                                                    listado: {
+                                                        ...submitData.listado,
+                                                        IdentificarFecha: event.target.value
+                                                    }
+                                                });
+                                                console.log(event.target.value);
+                                                console.log(submitData);
+                                            }}>
+                                    <FormControlLabel value="si" control={<Radio/>} label="Si"/>
+                                    <FormControlLabel value="no" control={<Radio/>} label="No"/>
+                                </RadioGroup>
+                            </FormControl>
+
+                            {submitData.listado.IdentificarFecha == 'si' ?
+                                <div className="col s12 respuesta">
+                                    <div className="input-field">
                                 <textarea id="textarea1" className="materialize-textarea" onChange={(event) => {
                                     event.persist();
                                     console.log(submitData);
@@ -448,52 +462,54 @@ export default function Formulario () {
                                     console.log(event.target.value);
                                     console.log(submitData);
                                 }}></textarea>
-                                            <label htmlFor="textarea1">Indicar fecha exacta o aproximada de ocurrencia
-                                                de
-                                                los
-                                                hechos denunciados</label>
-                                        </div>
-                                    </div> : ''}
-                            </> : ''}
+                                        <label htmlFor="textarea1">Indicar fecha exacta o aproximada de ocurrencia
+                                            de
+                                            los
+                                            hechos denunciados</label>
+                                    </div>
+                                </div> : ''}
+                        </> : ''}
 
 
-                            {steep == 7 ? <>
-                                <div className="col s12 pregunta">
-                                    <h5>¿Cómo se enteró de los hechos que está denunciando?</h5>
-                                </div>
+                        {steep == 7 ? <>
+                            <div className="col s12 pregunta">
+                                <h5>¿Cómo se enteró de los hechos que está denunciando?</h5>
+                            </div>
 
-                                <FormControl className={classes.formControl}>
-                                    <RadioGroup aria-label="gender" name="gender1"
-                                                value={submitData.listado.ComoseEntero}
-                                                onChange={(event) => {
-                                                    event.persist();
-                                                    console.log(submitData);
-                                                    submitData.listado.ComoseEntero = event.target.value;
-                                                    setSubmitData({
-                                                        ...submitData,
-                                                        listado: {
-                                                            ...submitData.listado,
-                                                            ComoseEntero: event.target.value
-                                                        }
-                                                    });
-                                                    console.log(event.target.value);
-                                                    console.log(submitData);
-                                                }}>
-                                        <FormControlLabel value="Me sucedió a mi" control={<Radio/>} label="Me sucedió a mi"/>
-                                        <FormControlLabel value="Lo observé" control={<Radio/>} label="Lo observé"/>
-                                        <FormControlLabel value="Lo escuché" control={<Radio/>} label="Lo escuché"/>
-                                        <FormControlLabel value="Un compañero de trabajo me lo comentó" control={<Radio/>}
-                                                          label="Un compañero de trabajo me lo comentó"/>
-                                        <FormControlLabel value="Encontré accidentalmente un informe o archivo" control={<Radio/>}
-                                                          label="Encontré accidentalmente un informe o archivo"/>
-                                        <FormControlLabel value="La deduje" control={<Radio/>} label="La deduje"/>
-                                        <FormControlLabel value="Otra" control={<Radio/>} label="Otra"/>
-                                    </RadioGroup>
-                                </FormControl>
+                            <FormControl className={classes.formControl}>
+                                <RadioGroup aria-label="gender" name="gender1"
+                                            value={submitData.listado.ComoseEntero}
+                                            onChange={(event) => {
+                                                event.persist();
+                                                console.log(submitData);
+                                                submitData.listado.ComoseEntero = event.target.value;
+                                                setSubmitData({
+                                                    ...submitData,
+                                                    listado: {
+                                                        ...submitData.listado,
+                                                        ComoseEntero: event.target.value
+                                                    }
+                                                });
+                                                console.log(event.target.value);
+                                                console.log(submitData);
+                                            }}>
+                                    <FormControlLabel value="Me sucedió a mi" control={<Radio/>}
+                                                      label="Me sucedió a mi"/>
+                                    <FormControlLabel value="Lo observé" control={<Radio/>} label="Lo observé"/>
+                                    <FormControlLabel value="Lo escuché" control={<Radio/>} label="Lo escuché"/>
+                                    <FormControlLabel value="Un compañero de trabajo me lo comentó" control={<Radio/>}
+                                                      label="Un compañero de trabajo me lo comentó"/>
+                                    <FormControlLabel value="Encontré accidentalmente un informe o archivo"
+                                                      control={<Radio/>}
+                                                      label="Encontré accidentalmente un informe o archivo"/>
+                                    <FormControlLabel value="La deduje" control={<Radio/>} label="La deduje"/>
+                                    <FormControlLabel value="Otra" control={<Radio/>} label="Otra"/>
+                                </RadioGroup>
+                            </FormControl>
 
-                                {submitData.listado.ComoseEntero == "Otra" ?
-                                    <div className="col s12 respuesta">
-                                        <div className="input-field">
+                            {submitData.listado.ComoseEntero == 'Otra' ?
+                                <div className="col s12 respuesta">
+                                    <div className="input-field">
                                 <textarea id="textarea1" className="materialize-textarea" onChange={(event) => {
                                     event.persist();
                                     console.log(submitData);
@@ -505,21 +521,21 @@ export default function Formulario () {
                                     console.log(event.target.value);
                                     console.log(submitData);
                                 }}></textarea>
-                                            <label htmlFor="textarea1">Indicar</label>
-                                        </div>
-                                    </div> : ''}
-                            </> : ''}
+                                        <label htmlFor="textarea1">Indicar</label>
+                                    </div>
+                                </div> : ''}
+                        </> : ''}
 
 
-                            {steep == 8 ? <>
-                                <div className="col s12 pregunta">
-                                    <h5>Suministre todos los detalles adicionales relacionados con la presunta
-                                        infracción que tenga conocimiento, y en general cualquier otra
-                                        información que pueda ser valiosa en la evaluación y resolución final de
-                                        esta situación (obligatoria) </h5>
-                                </div>
-                                <div className="col s12 respuesta">
-                                    <div className="input-field">
+                        {steep == 8 ? <>
+                            <div className="col s12 pregunta">
+                                <h5>Suministre todos los detalles adicionales relacionados con la presunta
+                                    infracción que tenga conocimiento, y en general cualquier otra
+                                    información que pueda ser valiosa en la evaluación y resolución final de
+                                    esta situación (obligatoria) </h5>
+                            </div>
+                            <div className="col s12 respuesta">
+                                <div className="input-field">
                                 <textarea id="textarea1" className="materialize-textarea" onChange={(event) => {
                                     event.persist();
                                     console.log(submitData);
@@ -531,48 +547,48 @@ export default function Formulario () {
                                     console.log(event.target.value);
                                     console.log(submitData);
                                 }}></textarea>
-                                        <label htmlFor="textarea1">Detalles</label>
-                                    </div>
+                                    <label htmlFor="textarea1">Detalles</label>
                                 </div>
-                            </> : ''}
+                            </div>
+                        </> : ''}
 
-                            {steep == 9 ? <>
-                                <div className="col s12 pregunta">
-                                    <h5>Si dispone de algún documento, fotografía o archivo que apoye su informe, por
-                                        favor
-                                        súbalo al sistema</h5>
+                        {steep == 9 ? <>
+                            <div className="col s12 pregunta">
+                                <h5>Si dispone de algún documento, fotografía o archivo que apoye su informe, por
+                                    favor
+                                    súbalo al sistema</h5>
+                            </div>
+                            <div className="file-field input-field">
+                                <div className="btn">
+                                    <span>Adjuntar archivo</span>
+                                    <input type="file"/>
                                 </div>
-                                <div className="file-field input-field">
-                                    <div className="btn">
-                                        <span>Adjuntar archivo</span>
-                                        <input type="file"/>
-                                    </div>
-                                    <div className="file-path-wrapper">
-                                        <input className="file-path validate" type="text"/>
-                                    </div>
+                                <div className="file-path-wrapper">
+                                    <input className="file-path validate" type="text"/>
                                 </div>
-                            </> : ''}
+                            </div>
+                        </> : ''}
 
 
-                            {steep > 0 ? <>
-                                <div className="col s3 m2">
-                                    <a className={steep > 1 ? 'waves-effect btn btn-large btn-next btn-volver red lighten-2' : 'waves-effect btn btn-large btn-next btn-volver red lighten-2 disabled'}
-                                       onClick={() => {
-                                           console.log('next paso');
-                                           console.log(steep);
-                                           setSteep(parseInt(steep - 1));
-                                       }}> <i className="fas fa-long-arrow-alt-left"></i></a>
-                                </div>
-                                <div className="col s9 m10">
-                                    <a className="waves-effect btn btn-large z-depth-0 lighten-2 color-next"
-                                       onClick={() => {
-                                           console.log('next paso');
-                                           console.log(steep);
-                                           submitData.listado.queHara == "Sugerencias y/o Reclamos Internos" || steep > 8 ? onSubmit(event, submitData)  : setSteep(parseInt(steep + 1));
-                                       }}>Continuar</a>
-                                </div>
-                            </> : ''}
-                        </>}
+                        {steep > 0 ? <>
+                            <div className="col s3 m2">
+                                <a className={steep > 1 ? 'waves-effect btn btn-large btn-next btn-volver red lighten-2' : 'waves-effect btn btn-large btn-next btn-volver red lighten-2 disabled'}
+                                   onClick={() => {
+                                       console.log('next paso');
+                                       console.log(steep);
+                                       setSteep(parseInt(steep - 1));
+                                   }}> <i className="fas fa-long-arrow-alt-left"></i></a>
+                            </div>
+                            <div className="col s9 m10">
+                                <a className="waves-effect btn btn-large z-depth-0 lighten-2 color-next"
+                                   onClick={() => {
+                                       console.log('next paso');
+                                       console.log(steep);
+                                       submitData.listado.queHara == 'Sugerencias y/o Reclamos Internos' || steep > 8 ? onSubmit(event, submitData) : setSteep(parseInt(steep + 1));
+                                   }}>Continuar</a>
+                            </div>
+                        </> : ''}
+                    </>}
 
                 </div>
             </FormControl>
