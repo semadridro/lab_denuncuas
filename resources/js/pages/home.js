@@ -17,6 +17,14 @@ import BlockIcon from '@material-ui/icons/Block';
 import AutorenewIcon from '@material-ui/icons/Autorenew';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+
 
 function createData (name, code, population, size) {
     const density = population / size;
@@ -65,7 +73,7 @@ export default function Home (props) {
         fetchData().then((data) => {
             console.log(data);
             setDataRowsTodo(data);
-            setDataRows(data.todas);
+            setDataRows(data);
         });
     }, []);
 
@@ -79,39 +87,16 @@ export default function Home (props) {
         //setDataRows([])
         console.log(newValue)
 
-        if (newValue == 0){
-            setDataRows(dataRowTodo.todas)
-            console.log(dataRow0)
-        }else if (newValue == 1){
-            setDataRows(dataRowTodo.pross)
-            console.log(dataRow)
-        }else if (newValue == 2){
-            setDataRows(dataRowTodo.concluidas)
-            console.log(dataRow)
-        }else if (newValue == 3){
-            setDataRows(dataRowTodo.spam)
-            console.log(dataRow)
-        }else{
-            setDataRows(dataRowTodo.todas)
-            console.log(dataRow)
-        }
-
-        /*getDenuncias({id_estado: newValue})
+        getDenuncias({id_estado: newValue})
             .then((data) => {
                 console.log(data);
                 setDataRows(data);
-                let procesados = data.filter(data => data.id_estado == 1);
-                setDataRows1(procesados)
-                let concluidos = data.filter(data => data.id_estado == 2);
-                setDataRows2(concluidos)
-                let spam = data.filter(data => data.id_estado == 3);
-                setDataRows3(spam)
             })
             .catch(error => {
                 error.json().then(({errors}) => {
                     console.log(errors);
                 });
-            });*/
+            });
     };
 
     const changeState = (id_estado) => {
@@ -133,31 +118,32 @@ export default function Home (props) {
                 <div className={classes.root}>
                     <Grid container spacing={3}>
                         <Grid item xs={12}>
-                            <MaterialTable
-                                title="Listado Denuncias "
-                                columns={dataColumns}
-                                data={dataRow}
-                                options={{
-                                    search: false,
-                                    toolbar: false,
-                                    actionsColumnIndex: -1
-                                }}
-                                localization={{
-                                    body: {
-                                        editTooltip: 'Editar',
-                                        deleteTooltip: 'Borrar',
-                                        editRow: {
-                                            deleteText: '¿Estás seguro de eliminar este documento?',
-                                            cancelTooltip: 'No',
-                                            saveTooltip: 'Si',
-                                        }
-                                    },
-                                    header: {
-                                        actions: ''
-                                    },
-
-                                }}
-                            />
+                            <TableContainer component={Paper}>
+                                <Table className={classes.table} aria-label="simple table">
+                                    <TableHead>
+                                        <TableRow>
+                                            <TableCell>N° Seguimiento</TableCell>
+                                            <TableCell align="right">Fecha</TableCell>
+                                            <TableCell align="right">Tipo</TableCell>
+                                            <TableCell align="right">Mensaje</TableCell>
+                                            <TableCell align="right">Detalle</TableCell>
+                                        </TableRow>
+                                    </TableHead>
+                                    <TableBody>
+                                        {dataRow.map((row) => (
+                                            <TableRow key={row.name}>
+                                                <TableCell component="th" scope="row">
+                                                    {row.codigo}
+                                                </TableCell>
+                                                <TableCell align="right">{row.fecha}</TableCell>
+                                                <TableCell align="right">{row.tipo}</TableCell>
+                                                <TableCell align="right">{row.mensaje}</TableCell>
+                                                <TableCell align="right"><Link to={'/detalle/' + row.id}><VisibilityIcon/></Link></TableCell>
+                                            </TableRow>
+                                        ))}
+                                    </TableBody>
+                                </Table>
+                            </TableContainer>
                         </Grid>
                     </Grid>
                 </div>

@@ -32,6 +32,8 @@ class DenunciasController extends Controller
 
     public function saveData(Request $request) {
 
+        var_dump($request);
+
         $randID =  $id = str_random(6);
 
         $regDenuncia = Denuncias::create([
@@ -44,29 +46,12 @@ class DenunciasController extends Controller
 
     public function getallDenuncias (Request $request){
 
-        $all = Denuncias::select("codigoReg AS codigo", "created_at AS fecha", "tipo_denuncia AS tipo", "mensaje", "id")
-            ->where("id_estado", "=", 0)
+        $denuncias = Denuncias::select("codigoReg AS codigo", "created_at AS fecha", "tipo_denuncia AS tipo", "mensaje", "id")
+            ->where("id_estado", "=", $request->id_estado)
             ->orderBy('id', 'desc')
             ->get();
 
-        $pross = Denuncias::select("codigoReg AS codigo", "created_at AS fecha", "tipo_denuncia AS tipo", "mensaje", "id")
-            ->where("id_estado", "=", 1)
-            ->orderBy('id', 'desc')
-            ->get();
-
-        $concluidas = Denuncias::select("codigoReg AS codigo", "created_at AS fecha", "tipo_denuncia AS tipo", "mensaje", "id")
-            ->where("id_estado", "=", 2)
-            ->orderBy('id', 'desc')
-            ->get();
-
-        $spam = Denuncias::select("codigoReg AS codigo", "created_at AS fecha", "tipo_denuncia AS tipo", "mensaje", "id")
-            ->where("id_estado", "=", 3)
-            ->orderBy('id', 'desc')
-            ->get();
         //return response()->json(['data' => trans($denuncias)], 200);
-
-        $denuncias = array("todas" => $all, "pross" => $pross, "concluidas" => $concluidas, "spam" => $spam);
-
 
         return response()->json(['data' => $denuncias ], 200);
     }
