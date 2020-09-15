@@ -231,8 +231,21 @@ export default function DetalleDenuncia (props) {
                                                 <td>{dataAdicional.TipoDenunci}</td>
                                             </tr>
                                             <tr>
-                                                <td>Personas comprometidas</td>
-                                                <td>{dataAdicional.IdentificarPersonasDetalle}</td>
+                                                <td>¿Puede identificar a las personas involucradas en la denuncia?</td>
+                                                <td>{dataAdicional.IdentificarPersonas} {dataAdicional.IdentificarPersonasDetalle}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>¿Puede identificar donde sucedieron los hechos de su denuncia?</td>
+                                                <td>{dataAdicional.IndentificarLugarHechos} {dataAdicional.IndentificarLugarHechosDetalle}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>¿Puede indicar cuando (fecha exacta o aproximada) sucedieron los hechos de su
+                                                    denuncia?</td>
+                                                <td>{dataAdicional.IdentificarFecha} {dataAdicional.IdentificarFechaDetalle}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>¿Cómo se enteró de los hechos que está denunciando?</td>
+                                                <td>{dataAdicional.ComoseEntero} {dataAdicional.ComoseEnteroDetalle}</td>
                                             </tr>
                                             <tr>
                                                 <td class="minw300">Detalles Adicionaes</td>
