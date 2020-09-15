@@ -74,12 +74,12 @@ export default function Formulario () {
 
         let formData = new FormData();
 
-        console.log("files.current")
+        /*console.log("files.current")
         console.log(files)
         for (let i = 0; i < files.length; i++) {
             console.log(files[i])
             formData.append('file' + i, files[i]);
-        }
+        }*/
 
         formData.append('dataJson', JSON.stringify(submitData));
 
