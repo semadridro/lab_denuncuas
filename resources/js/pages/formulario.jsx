@@ -33,6 +33,8 @@ export default function Formulario () {
             queHaraDetalle: '',
             TipoDenunci: '',
             TipoDenunciaOtro: '',
+            IdentificarPersonas: '',
+            IdentificarPersonasDetalle: '',
             IndentificarLugarHechos: '',
             IndentificarLugarHechosDetalle: '',
             IdentificarFecha: '',
@@ -41,7 +43,8 @@ export default function Formulario () {
             ComoseEnteroDetalle: '',
             detalleGeneral: '',
         },
-        codigo: codigo
+        codigo: codigo,
+        files : ''
     });
     const classes = useStyles();
     const [age, setAge] = React.useState('');
@@ -51,11 +54,13 @@ export default function Formulario () {
     };
 
     const [showNombre, setshowNombre] = useState(false);
+    const [statusBtn, setstatusBtn] = useState(true);
     const [loading, setloading] = useState(false);
 
     const [steep, setSteep] = useState(0);
     const form = useRef(null);
     const [resetFeedback, setResetFeedback] = useState('');
+    const [files, setFiles] = useState();
 
     const onSubmit = async (event, submitData) => {
         setloading(true);
@@ -65,9 +70,20 @@ export default function Formulario () {
         setcodigo(Math.random().toString(36).slice(2));
 
         let jsonData = JSON.stringify(submitData);
+        console.log(jsonData)
 
         let formData = new FormData();
-        formData.append('dataJson', jsonData);
+
+        console.log("files.current")
+        console.log(files)
+        for (let i = 0; i < files.length; i++) {
+            console.log(files[i])
+            formData.append('file' + i, files[i]);
+        }
+
+        formData.append('dataJson', JSON.stringify(submitData));
+
+        console.log(formData)
 
         /*try{
             let config = {
@@ -96,6 +112,7 @@ export default function Formulario () {
                 console.log(status);
                 setResetFeedback(status);
                 let stCodigo = status;
+                setcodigo(status)
                 console.log('stCodigo');
                 console.log(stCodigo);
                 console.log(resetFeedback);
@@ -150,6 +167,7 @@ export default function Formulario () {
                                             onChange={(event) => {
                                                 event.persist();
                                                 console.log(submitData);
+                                                setstatusBtn(false)
                                                 submitData.listado.identificarse = event.target.value;
                                                 setSubmitData({
                                                     ...submitData,
@@ -194,6 +212,7 @@ export default function Formulario () {
                                             onChange={(event) => {
                                                 event.persist();
                                                 console.log(submitData);
+                                                setstatusBtn(false)
                                                 submitData.listado.relacionCompany = event.target.value;
                                                 setSubmitData({
                                                     ...submitData,
@@ -247,6 +266,7 @@ export default function Formulario () {
                                             onChange={(event) => {
                                                 event.persist();
                                                 console.log(submitData);
+                                                setstatusBtn(false)
                                                 submitData.listado.queHara = event.target.value;
                                                 setSubmitData({
                                                     ...submitData,
@@ -294,6 +314,7 @@ export default function Formulario () {
                                             onChange={(event) => {
                                                 event.persist();
                                                 console.log(submitData);
+                                                setstatusBtn(false)
                                                 submitData.listado.TipoDenunci = event.target.value;
                                                 setSubmitData({
                                                     ...submitData,
@@ -367,10 +388,60 @@ export default function Formulario () {
 
                         </> : ''}
 
-
                         {steep == 5 ? <>
                             <div className="col s12 pregunta">
-                                <h5>¿Puede indicar donde sucedieron los hechos de su denuncia?</h5>
+                                <h5>¿Puede identificar a las personas involucradas en la denuncia?</h5>
+                            </div>
+
+                            <FormControl className={classes.formControl}>
+                                <RadioGroup aria-label="gender" name="gender1"
+                                            value={submitData.listado.IdentificarPersonas}
+                                            onChange={(event) => {
+                                                event.persist();
+                                                console.log(submitData);
+                                                setstatusBtn(false)
+                                                submitData.listado.IdentificarPersonas = event.target.value;
+                                                setSubmitData({
+                                                    ...submitData,
+                                                    listado: {
+                                                        ...submitData.listado,
+                                                        IdentificarPersonas: event.target.value
+                                                    }
+                                                });
+                                                console.log(event.target.value);
+                                                console.log(submitData);
+                                            }}>
+                                    <FormControlLabel value="si" control={<Radio/>} label="Si"/>
+                                    <FormControlLabel value="no" control={<Radio/>} label="No"/>
+                                </RadioGroup>
+                            </FormControl>
+
+                            {submitData.listado.IdentificarPersonas == 'si' ?
+                                <div className="col s12 respuesta">
+                                    <div className="input-field">
+                                <textarea id="textarea1" className="materialize-textarea" onChange={(event) => {
+                                    event.persist();
+                                    console.log(submitData);
+                                    submitData.listado.IdentificarPersonasDetalle = event.target.value;
+                                    setSubmitData({
+                                        ...submitData,
+                                        listado: {...submitData.listado, IdentificarPersonasDetalle: event.target.value}
+                                    });
+                                    console.log(event.target.value);
+                                    console.log(submitData);
+                                }}></textarea>
+                                        <label htmlFor="textarea1">Indicar fecha exacta o aproximada de ocurrencia
+                                            de
+                                            los
+                                            hechos denunciados</label>
+                                    </div>
+                                </div> : ''}
+                        </> : ''}
+
+
+                        {steep == 6 ? <>
+                            <div className="col s12 pregunta">
+                                <h5>¿Puede identificar donde sucedieron los hechos de su denuncia?</h5>
                             </div>
 
                             <FormControl className={classes.formControl}>
@@ -379,6 +450,7 @@ export default function Formulario () {
                                             onChange={(event) => {
                                                 event.persist();
                                                 console.log(submitData);
+                                                setstatusBtn(false)
                                                 submitData.listado.IndentificarLugarHechos = event.target.value;
                                                 setSubmitData({
                                                     ...submitData,
@@ -413,14 +485,12 @@ export default function Formulario () {
                                               console.log(event.target.value);
                                               console.log(submitData);
                                           }}></textarea>
-                                        <label htmlFor="textarea1">Nombrar lugar o licación donde sucedieron los
-                                            hechos</label>
+                                        <label htmlFor="textarea1">Nombre de los involucrados y cargos si los supiese</label>
                                     </div>
                                 </div> : ''}
                         </> : ''}
 
-
-                        {steep == 6 ? <>
+                        {steep == 7 ? <>
                             <div className="col s12 pregunta">
                                 <h5>¿Puede indicar cuando (fecha exacta o aproximada) sucedieron los hechos de su
                                     denuncia?</h5>
@@ -432,6 +502,7 @@ export default function Formulario () {
                                             onChange={(event) => {
                                                 event.persist();
                                                 console.log(submitData);
+                                                setstatusBtn(false)
                                                 submitData.listado.IdentificarFecha = event.target.value;
                                                 setSubmitData({
                                                     ...submitData,
@@ -471,7 +542,7 @@ export default function Formulario () {
                         </> : ''}
 
 
-                        {steep == 7 ? <>
+                        {steep == 8 ? <>
                             <div className="col s12 pregunta">
                                 <h5>¿Cómo se enteró de los hechos que está denunciando?</h5>
                             </div>
@@ -482,6 +553,7 @@ export default function Formulario () {
                                             onChange={(event) => {
                                                 event.persist();
                                                 console.log(submitData);
+                                                setstatusBtn(false)
                                                 submitData.listado.ComoseEntero = event.target.value;
                                                 setSubmitData({
                                                     ...submitData,
@@ -513,6 +585,7 @@ export default function Formulario () {
                                 <textarea id="textarea1" className="materialize-textarea" onChange={(event) => {
                                     event.persist();
                                     console.log(submitData);
+                                    setstatusBtn(false)
                                     submitData.listado.ComoseEnteroDetalle = event.target.value;
                                     setSubmitData({
                                         ...submitData,
@@ -527,7 +600,7 @@ export default function Formulario () {
                         </> : ''}
 
 
-                        {steep == 8 ? <>
+                        {steep == 9 ? <>
                             <div className="col s12 pregunta">
                                 <h5>Suministre todos los detalles adicionales relacionados con la presunta
                                     infracción que tenga conocimiento, y en general cualquier otra
@@ -539,6 +612,7 @@ export default function Formulario () {
                                 <textarea id="textarea1" className="materialize-textarea" onChange={(event) => {
                                     event.persist();
                                     console.log(submitData);
+                                    setstatusBtn(false)
                                     submitData.listado.detalleGeneral = event.target.value;
                                     setSubmitData({
                                         ...submitData,
@@ -552,7 +626,7 @@ export default function Formulario () {
                             </div>
                         </> : ''}
 
-                        {steep == 9 ? <>
+                        {steep == 10 ? <>
                             <div className="col s12 pregunta">
                                 <h5>Si dispone de algún documento, fotografía o archivo que apoye su informe, por
                                     favor
@@ -561,7 +635,16 @@ export default function Formulario () {
                             <div className="file-field input-field">
                                 <div className="btn">
                                     <span>Adjuntar archivo</span>
-                                    <input type="file"/>
+                                    <input type="file" onChange={(event) => {
+                                        event.preventDefault()
+                                        console.log("ARCHIVOS")
+                                        console.log(event.target.files)
+                                        setFiles(event.target.files)
+                                        setSubmitData({
+                                            ...submitData,
+                                            files: event.target.files
+                                        });
+                                    }}/>
                                 </div>
                                 <div className="file-path-wrapper">
                                     <input className="file-path validate" type="text"/>
@@ -572,20 +655,22 @@ export default function Formulario () {
 
                         {steep > 0 ? <>
                             <div className="col s3 m2">
-                                <a className={steep > 1 ? 'waves-effect btn btn-large btn-next btn-volver red lighten-2' : 'waves-effect btn btn-large btn-next btn-volver red lighten-2 disabled'}
+                                <button type={"button"} className={steep > 1 ? 'waves-effect btn btn-large btn-next btn-volver red lighten-2' : 'waves-effect btn btn-large btn-next btn-volver red lighten-2 disabled'}
                                    onClick={() => {
                                        console.log('next paso');
                                        console.log(steep);
                                        setSteep(parseInt(steep - 1));
-                                   }}> <i className="fas fa-long-arrow-alt-left"></i></a>
+                                   }}> <i className="fas fa-long-arrow-alt-left"></i></button>
                             </div>
                             <div className="col s9 m10">
-                                <a className="waves-effect btn btn-large z-depth-0 lighten-2 color-next"
+                                <button type={"button"} disabled={steep > 9 ? false : statusBtn} className="waves-effect btn btn-large z-depth-0 lighten-2 color-next"
                                    onClick={() => {
                                        console.log('next paso');
                                        console.log(steep);
-                                       submitData.listado.queHara == 'Sugerencias y/o Reclamos Internos' || steep > 8 ? onSubmit(event, submitData) : setSteep(parseInt(steep + 1));
-                                   }}>Continuar</a>
+                                       console.log("bloqueo btn")
+                                       setstatusBtn(true);
+                                       submitData.listado.queHara == 'Sugerencias y/o Reclamos Internos' || steep > 9 ? onSubmit(event, submitData) : setSteep(parseInt(steep + 1));
+                                   }}>Continuar</button>
                             </div>
                         </> : ''}
                     </>}

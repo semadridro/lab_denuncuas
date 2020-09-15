@@ -19,6 +19,8 @@ import Typography from '@material-ui/core/Typography';
 import AutorenewIcon from '@material-ui/icons/Autorenew';
 import BlockIcon from '@material-ui/icons/Block';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import WatchLaterIcon from '@material-ui/icons/WatchLater';
+
 
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
@@ -29,6 +31,9 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
+
+
+
 
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -186,20 +191,24 @@ export default function DetalleDenuncia (props) {
 
     return (
         <>
+
             <Container>
                 {console.log('dataRow')}
                 {console.log(dataRow)}
                 {console.log(dataAdicional)}
                 <div className={classes.root}>
-                    <Grid container spacing={3} direction="row" ustify="center">
-                        <Grid item xs={8}>
-                            <Paper className={classes.paper} elevation={3}>
-                                <Grid container spacing={3} direction="row" ustify="center">
-                                    <Grid item xs={12}>
+
+                    <Grid container spacing={3} direction="row"  className={"margintop estdosfix"}>
+                        <Grid item xs={dataRow.id_estado == 0 || dataRow.id_estado == 3 ? 12 : 8}>
                                         <Typography variant="h5" gutterBottom>
-                                            <Button color="primary" onClick={() => props.history.goBack()}> <ArrowBackIosIcon /></Button>  Denuncia
+                                            <Button className={"fix-arrow"} onClick={() => props.history.goBack()}><ArrowBackIosIcon /></Button>{dataRow.id_estado == 0 ? <h1><WatchLaterIcon /> Denuncia Pendiente</h1> : <h1></h1>}{dataRow.id_estado == 1 ?  <h1><AutorenewIcon /> Denuncia en Proceso</h1> : <h1></h1>}{dataRow.id_estado == 2 ? <h1><CheckBoxIcon /> Denuncia Concluida</h1> : <h1></h1>}{dataRow.id_estado == 3 ? <h1><BlockIcon /> Spam</h1> : <h1></h1>}
                                         </Typography>
-                                    </Grid>
+                        </Grid>
+                        <Grid item xs={dataRow.id_estado == 0 || dataRow.id_estado == 3 ? 12 : 8}>
+
+                            <Paper className={classes.paper} elevation={5}>
+                                <Grid container spacing={3} direction="row" justify="center">
+
 
                                     <Grid item xs={12}>
 
@@ -219,14 +228,14 @@ export default function DetalleDenuncia (props) {
                                             </tr>
                                             <tr>
                                                 <td>Tipo de denuncia</td>
-                                                <td>{dataRow.tipo_denuncia}</td>
+                                                <td>{dataAdicional.TipoDenunci}</td>
                                             </tr>
                                             <tr>
                                                 <td>Personas comprometidas</td>
-                                                <td></td>
+                                                <td>{dataAdicional.IdentificarPersonasDetalle}</td>
                                             </tr>
                                             <tr>
-                                                <td>Detalles Adicionaes</td>
+                                                <td class="minw300">Detalles Adicionaes</td>
                                                 <td>{dataRow.mensaje}</td>
                                             </tr>
                                             <tr>
@@ -243,6 +252,7 @@ export default function DetalleDenuncia (props) {
                                     direction="row"
                                     justify="flex-end"
                                     alignItems="center"
+                                    className={"button-fix"}
                                 >
                                     <Button variant="contained" color="primary" onClick={() => handlerChangeStatus(1)}>
                                         <AutorenewIcon /> Procesar
@@ -256,14 +266,14 @@ export default function DetalleDenuncia (props) {
                             </Paper>
                         </Grid>
                         {dataRow.id_estado == 1 ? <Grid item m={4} xs={4}>
-                            <Paper className={classes.paper} elevation={3}>
-                                <Grid container spacing={3}>
+                            <Paper className={classes.paper} elevation={5}>
+                                <Grid container>
                                     <Grid item xs={12}>
                                         <Typography variant="h5" gutterBottom>
                                             Mensaje
                                         </Typography>
                                     </Grid>
-                                    <Grid item xs={12}>
+                                    <Grid item xs={12} className={"fix-textarea"}>
                                         <TextField
                                             className={classes.formControl}
                                             id="standard-multiline-static"
@@ -271,6 +281,7 @@ export default function DetalleDenuncia (props) {
                                             multiline
                                             rows={4}
                                             variant="outlined"
+
                                             onChange={(event) => {
                                                 event.persist();
                                                 submitData.listado.mensaje = event.target.value;
@@ -289,8 +300,9 @@ export default function DetalleDenuncia (props) {
                                         direction="row"
                                         justify="flex-end"
                                         alignItems="center"
+
                                     >
-                                        <Button variant="contained" color="primary" onClick={handlerSubmit}>
+                                        <Button variant="contained" color="primary" onClick={handlerSubmit} className={"margintop30"}>
                                             <CheckBoxIcon /> Concluir
                                         </Button>
                                     </Grid>
@@ -299,7 +311,7 @@ export default function DetalleDenuncia (props) {
                             </Paper>
                         </Grid> : ''}
                         {dataRow.id_estado == 2 ? <Grid item m={4} xs={4}>
-                            <Paper className={classes.paper} elevation={3}>
+                            <Paper className={classes.paper} elevation={5}>
                                 <Grid container spacing={3}>
                                     <Grid item xs={12}>
                                         <Typography variant="h5" gutterBottom>

@@ -8,6 +8,8 @@ function Client (endpoint, {method, body, ...customConfig} = {}) {
 
   const headers = {
     'content-type': 'application/json',
+      'Accept': 'application/json, text/plain, */*',
+      'Content-Type': 'multipat/form-data',
     'X-Requested-With': 'XMLHttpRequest'
   };
 

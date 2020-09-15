@@ -11,6 +11,7 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import LiveHelpIcon from '@material-ui/icons/LiveHelp';
 import './css-mod -admin.css'
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -60,7 +61,7 @@ function AuthNav () {
                         <Typography variant="h6" className={classes.title}>
                             Denuncias Anónimas
                         </Typography>
-                        <Button type={"button"} color="inherit" onClick={handleLogout}> {currentUser.name}</Button>
+                        <Button type={"button"} color="inherit" onClick={handleLogout}><ExitToAppIcon /> Cerrar sesión</Button>
                     </Toolbar>
                 </AppBar>
 

@@ -14,19 +14,20 @@ class DenunciasController extends Controller
 
         $randID =  $id = str_random(6);
         $data = json_decode($request->dataJson);
-        var_dump($data->listado);
-        var_dump($data->codigo);
+
+        /*var_dump($data);
+        var_dump($_FILES);*/
 
         $regDenuncia = Denuncias::create([
             "dataJson" => json_encode($data->listado),
             "codigoReg" => $data->codigo,
-            "tipo_denuncia" => empty($data->listado->tipo_denuncia)?$data->listado->queHara:$data->listado->tipo_denuncia,
+            "tipo_denuncia" => empty($data->listado->TipoDenunci)?$data->listado->queHara:$data->listado->TipoDenunci,
             "mensaje" => empty($data->listado->detalleGeneral)?$data->listado->queHaraDetalle:$data->listado->detalleGeneral,
             "id_estado" => 0
         ]);
 
 
-        return response()->json(['status' => trans($randID)], 200);
+        return response()->json(['status' => $data->codigo], 200);
     }
 
 

@@ -117,15 +117,15 @@ export default function Home (props) {
 
                 <div className={classes.root}>
                     <Grid container spacing={3}>
-                        <Grid item xs={12}>
-                            <TableContainer component={Paper}>
+                        <Grid item xs={12} >
+                            <TableContainer component={Paper} elevation={5} className={'padinginfofix'}>
                                 <Table className={classes.table} aria-label="simple table">
                                     <TableHead>
                                         <TableRow>
                                             <TableCell>N° Seguimiento</TableCell>
-                                            <TableCell align="right">Fecha</TableCell>
-                                            <TableCell align="right">Tipo</TableCell>
-                                            <TableCell align="right">Mensaje</TableCell>
+                                            <TableCell >Fecha</TableCell>
+                                            <TableCell >Tipo</TableCell>
+                                            <TableCell >Mensaje</TableCell>
                                             <TableCell align="right">Detalle</TableCell>
                                         </TableRow>
                                     </TableHead>
@@ -135,9 +135,9 @@ export default function Home (props) {
                                                 <TableCell component="th" scope="row">
                                                     {row.codigo}
                                                 </TableCell>
-                                                <TableCell align="right">{row.fecha}</TableCell>
-                                                <TableCell align="right">{row.tipo}</TableCell>
-                                                <TableCell align="right">{row.mensaje}</TableCell>
+                                                <TableCell >{row.fecha}</TableCell>
+                                                <TableCell >{row.tipo}</TableCell>
+                                                <TableCell className={'truncar'}>{row.mensaje}</TableCell>
                                                 <TableCell align="right"><Link to={'/detalle/' + row.id}><VisibilityIcon/></Link></TableCell>
                                             </TableRow>
                                         ))}

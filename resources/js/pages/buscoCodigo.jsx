@@ -65,7 +65,7 @@ export default function BuscoDenuncia () {
                 <div className="col s12">
                     <p><b>El estado de su denuncia es el siguiente.</b></p>
                 </div>
-                {dataRow != "" ?
+                {dataRow != "" && dataRow != null?
                 <div className="col s12">
                     <table>
                         <tbody>
@@ -88,7 +88,11 @@ export default function BuscoDenuncia () {
                         </tr>
                         </tbody>
                     </table>
-                </div> : '' }
+                </div> : codigo != "" && dataRow == null?<div className="col s12">
+                        <Alert variant="filled" severity="warning">
+                            Código <b>{codigo} consutado sin registros</b>
+                        </Alert>
+                    </div> : '' }
             </div>
         </>
     );

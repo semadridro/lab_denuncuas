@@ -17,42 +17,97 @@ button:focus {
 }
 
 .MuiBottomNavigationAction-wrapper {
-    flex-direction: row;
+    flex-direction: row !important;
 }
 
 .MuiSvgIcon-root {
     margin-right: 10px;
 }
 
-
-
-.MuiGrid-spacing-xs-3 .fix-center-row{
-    max-width: 80%;
-    margin: auto;
-}
 .MuiPaper-rounded {
-    border-radius: 15px;
+    border-radius: 15px !important;
 }
 .MuiBottomNavigationAction-label.MuiBottomNavigationAction-iconOnly {
-    opacity: 1;
-    transition-delay: 0s;
+    opacity: 1 !important;
+    transition-delay: 0s !important;
 }
 .MuiBottomNavigationAction-label {
-    font-size: 0.85rem;
+    font-size: 0.85rem !important;
 }
 .MuiBottomNavigationAction-root.MuiBottomNavigationAction-iconOnly {
-    padding-top: 6px;
+    padding-top: 6px !important;
 }
 .MuiBottomNavigation-root {
     margin-bottom: 30px;
 }
 
-p {
-    line-height: 1.5;
-    text-align: center;
-}
 .MuiTablePagination-root:last-child, tr.MuiTableRow-root.MuiTableRow-footer {
 
     border-bottom: 0px !important;
 
+}
+
+.margintop{
+    margin-top:50px !important;
+}
+.margintop30{
+    margin-top:30px !important;
+}
+.button-fix button{
+    margin:30px 0px 20px 30px;
+}
+
+.button-fix button .MuiSvgIcon-root{
+    margin-right: 0px;
+}
+.fix-arrow svg{
+    margin-right: 0 !important;
+    margin-left: 10px !important;
+}
+.fix-arrow {
+    padding: 5px !important;
+    width: auto !important;
+    min-width: auto !important;
+}
+
+.fix-textarea > .MuiTextField-root{
+    margin: 30px 0 !important;
+}
+.estdosfix h1 {
+    font-size: 21px;
+    margin: 10px 0 20px 0;
+    font-weight: 500;
+    color: #3f51b5;
+    display: inline;
+}
+
+p.fixdet {
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    margin-top: 100px;
+    line-height: 1.5;
+    text-align: center;
+}
+ h1 svg{
+    vertical-align: middle;
+    margin:0 !important;
+    padding-bottom: 3px;
+ }
+ .MuiPaper-elevation5 {
+    box-shadow: 0px 3px 20px -1px rgba(7, 19, 81, 0.11) !important;
+}
+.padinginfofix{
+    padding: 10px 30px 30px;
+}
+.truncar{
+    width: 40%;
+    height: 50px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 300px;
+}
+.minw300{
+    min-width: 300px;
 }
