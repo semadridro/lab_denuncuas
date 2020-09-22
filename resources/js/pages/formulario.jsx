@@ -22,7 +22,10 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Formulario () {
 
+    console.log("Page hostname is: " + window.location.hostname);
+
     const [codigo, setcodigo] = useState(Math.random().toString(36).slice(2));
+    const [codigoRespuesta, setcodigoRespuesta] = useState();
     const [submitData, setSubmitData] = useState({
         listado: {
             identificarse: '',
@@ -44,7 +47,6 @@ export default function Formulario () {
             detalleGeneral: '',
         },
         codigo: codigo,
-        files : ''
     });
     const classes = useStyles();
     const [age, setAge] = React.useState('');
@@ -72,41 +74,29 @@ export default function Formulario () {
         let jsonData = JSON.stringify(submitData);
         console.log(jsonData)
 
-        let formData = new FormData();
-
-        /*console.log("files.current")
-        console.log(files)
-        for (let i = 0; i < files.length; i++) {
-            console.log(files[i])
-            formData.append('file' + i, files[i]);
-        }*/
-
-        formData.append('dataJson', JSON.stringify(submitData));
+        const formData = new FormData();
+        formData.append('file', files);
+        formData.append('data', jsonData);
+        console.log("formData")
+        console.log(formData.get('file'))
+        console.log(formData.get('data'))
 
         console.log(formData)
 
-        /*try{
-            let config = {
-                method:'POST',
-                header:{
-                    'Accept' : 'application/json',
-                    'Content-Type' : 'application/json'
-                },
-                body: formData
-            }
+        fetch('//'+window.location.hostname+'/api/denuncias/saveDate', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+                setcodigoRespuesta(data.status)
+            })
+            .catch(error => {
+                console.error(error)
+            })
 
-            console.log(formData)
-
-
-            let res = await fetch('http://lab_denuncuas.test/api/denuncias/saveDate',config)
-
-            console.log(res)
-
-        }catch(e){
-            console.log(e);
-        }*/
-
-        registroDenuncia({dataJson: jsonData})
+        /*registroDenuncia({dataJson: formData})
             .then(status => {
                 console.log('status.status');
                 console.log(status);
@@ -123,14 +113,15 @@ export default function Formulario () {
                 error.json().then(({errors}) => {
                     console.log(errors);
                 });
-            });
+            });*/
+
     };
 
     {/*  <div className="col s12"><LinearProgress/> Denuncia realiza con éxito, el código asignado es <b>{Math.random().toString(36).slice(2)}</b></div> : resetFeedback != '' ?*/
     }
     return (
         <>
-            <FormControl onSubmit={onSubmit} ref={form}>
+            <FormControl onSubmit={onSubmit} ref={form} encType="multipart/form-data">
                 <div className="space-30">
                 </div>
                 <div className="row">
@@ -143,7 +134,7 @@ export default function Formulario () {
                     </div>
                     {loading ? <div className="col s12">
                         <Alert variant="filled" severity="success">
-                            Denuncia realiza con éxito, el código asignado es <b>{codigo}</b>
+                            Denuncia realiza con éxito, el código asignado es <b>{codigoRespuesta}</b>
                         </Alert>
                     </div> : <>
 
@@ -635,15 +626,11 @@ export default function Formulario () {
                             <div className="file-field input-field">
                                 <div className="btn">
                                     <span>Adjuntar archivo</span>
-                                    <input type="file" onChange={(event) => {
+                                    <input type="file" name={"file"} onChange={(event) => {
                                         event.preventDefault()
                                         console.log("ARCHIVOS")
                                         console.log(event.target.files)
-                                        setFiles(event.target.files)
-                                        setSubmitData({
-                                            ...submitData,
-                                            files: event.target.files
-                                        });
+                                        setFiles(event.target.files[0])
                                     }}/>
                                 </div>
                                 <div className="file-path-wrapper">

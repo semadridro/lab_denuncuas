@@ -1,6 +1,7 @@
 import React, {useState, useEffect, useReducer, useContext} from 'react';
 import {useAuth} from '../context/auth';
 import {getDetalleDenuncia, postChangeDenuncia, postChangeStatus,getUser} from '../api/auth';
+import {Link} from "react-router-dom";
 
 import { browserHistory } from 'react-router'
 
@@ -31,6 +32,7 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
+import AttachFileIcon from '@material-ui/icons/AttachFile';
 
 
 
@@ -248,12 +250,12 @@ export default function DetalleDenuncia (props) {
                                                 <td>{dataAdicional.ComoseEntero} {dataAdicional.ComoseEnteroDetalle}</td>
                                             </tr>
                                             <tr>
-                                                <td class="minw300">Detalles Adicionaes</td>
+                                                <td class="minw300">Detalles Adicionales</td>
                                                 <td>{dataRow.mensaje}</td>
                                             </tr>
                                             <tr>
                                                 <td>Documentos Adjuntos</td>
-                                                <td></td>
+                                                <td>{dataRow.url_attch != null ? <a className="link" href={dataRow.url_attch} target={"_blank"}><AttachFileIcon/></a> : ''}</td>
                                             </tr>
                                             </tbody>
                                         </table>

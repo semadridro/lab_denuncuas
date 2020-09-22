@@ -20,6 +20,6 @@ class Denuncias extends Model
 
 
     protected $fillable = [
-        'dataJson', 'codigoReg', 'tipo_denuncia','mensaje','id_estado'
+        'dataJson', 'codigoReg', 'tipo_denuncia','mensaje','id_estado','url_attch'
     ];
 }

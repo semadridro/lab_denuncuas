@@ -16,7 +16,7 @@ export const register = ({ email, name, password, password_confirmation }) => {
 };
 
 export const registroDenuncia = ({ dataJson }) => {
-    return client('/api/denuncias/saveDate', { body: { dataJson } })
+    return client('/api/denuncias/saveDate', {method: "POST", body: { dataJson }, 'content-type': 'multipat/form-data'})
         .then(({ status }) => status);
 };
 

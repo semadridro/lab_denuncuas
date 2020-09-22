@@ -80,7 +80,7 @@ export default function BuscoDenuncia () {
                         </tr>
                         <tr>
                             <td className="desc">Estado</td>
-                            <td>{dataRow.id_estado = 1 ? "En Proceso" : dataRow.id_estado = 2 ? "Concluida" : "Investigando"}</td>
+                            <td>{(dataRow.id_estado == 1 || dataRow.id_estado) == 0? <p>En Proceso</p> : dataRow.id_estado == 2 ? <p>Concluida</p> : dataRow.id_estado == 3 ? <p>Su denuncia se ha identificado cómo spam, inténtalo nuevamente.</p> : ''}</td>
                         </tr>
                         <tr>
                             <td className="desc">Mensaje</td>
